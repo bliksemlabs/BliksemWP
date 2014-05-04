@@ -54,7 +54,7 @@
                 <toolkit:DatePicker x:Name="datePicker" Margin="0" Grid.Row="1" 
                                      HorizontalAlignment="Left" 
                                     Width="180" />
-                <toolkit:TimePicker x:Name="timePicker"  
+                <toolkit:TimePicker x:Name="timePicker"  ValueStringFormat="{}{0:t}"
                                     Grid.Row="1" Width="180" HorizontalAlignment="Right"
                                     Margin="0" VerticalAlignment="Center"/>
                 <RadioButton Grid.Row="2" IsChecked="True" GroupName="VA" 
@@ -67,7 +67,7 @@
             <StackPanel Orientation="Horizontal">
             </StackPanel>
             <Button x:Name="btnStart" Click="btnStart_Click">Plan!</Button>
-            <Button x:Name="btnupdate" Click="btnUpdate_Click" Content="Laad nieuwe data"/>
+            <Button x:Name="btnupdate" Click="btnUpdate_Click" Content="Laad nieuwe data" IsEnabled="False" VerticalAlignment="Bottom"/>
 
         </StackPanel>
     </Grid>

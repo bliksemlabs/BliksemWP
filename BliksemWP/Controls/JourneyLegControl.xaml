@@ -22,7 +22,7 @@
         </Grid.ColumnDefinitions>
         <Image Source="/Images/appbar.train.png" Grid.Column="0" Grid.Row="0"/>
         <TextBlock Grid.Row="0" Grid.Column="1"
-                           HorizontalAlignment="Left" Text="{Binding DepartureTime, StringFormat='HH:mm'}"
+                           HorizontalAlignment="Left" Text="{Binding DepartureTime, StringFormat='t'}"
                            Name="DepartureTime"
                            Width="100" FontFamily="Segoe WP Semibold"/>
         <TextBlock Grid.Row="0" Grid.Column="2" 
@@ -34,7 +34,7 @@
                            Text="{Binding ProductDescription}"   
                            HorizontalAlignment="Left" FontFamily="Segoe WP Light" />
         <TextBlock Grid.Row="2" Grid.Column="1"
-                           HorizontalAlignment="Left" Text="{Binding ArrivalTime, StringFormat='HH:mm'}" 
+                           HorizontalAlignment="Left" Text="{Binding ArrivalTime, StringFormat='t'}" 
                            Name="ArrivalTime"
                            Width="100" FontFamily="Segoe WP Semibold"/>
         <Image Source="/Images/appbar.train.png" Grid.Column="0" Grid.Row="2"/>
