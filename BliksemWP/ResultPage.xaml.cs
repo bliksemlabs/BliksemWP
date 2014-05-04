@@ -36,12 +36,12 @@ namespace BliksemWP
                 toStopId = Convert.ToInt32(toString);
             } 
             
-            var a = new NcxPppp.LibRrrr();
-            var reisadvies = a.route(App.DATA_FILE_PATH, fromStopId, toStopId);
+            var router = new NcxPppp.LibRrrr();
+            var reisadvies = router.route(App.DATA_FILE_PATH, fromStopId, toStopId);
             if (reisadvies.Length > 1) {
                 ResultConverter c = new ResultConverter(reisadvies);
-                List<JourneyLeg> journeyLegs = c.GetLegs();
-                foreach (JourneyLeg leg in journeyLegs) {
+                List<Leg> journeyLegs = c.GetLegs();
+                foreach (Leg leg in journeyLegs) {
                     spJourneyLegs.Children.Add(new JourneyLegControl(leg));
                 }
                 DepartureName.Text = journeyLegs[0].Departure;

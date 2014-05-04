@@ -44,7 +44,14 @@ namespace BliksemWP
         {
             Stop fromStop = (Stop) from.SelectedItem;
             Stop toStop = (Stop) to.SelectedItem;
-            NavigationService.Navigate(new Uri("/ResultPage.xaml?from=" + fromStop.StopIndex+ "&to=" + toStop.StopIndex, UriKind.Relative));
+            if (fromStop != null && toStop != null) {
+                NavigationService.Navigate(new Uri("/ResultPage.xaml?from=" + fromStop.StopIndex + "&to=" + toStop.StopIndex, UriKind.Relative));
+            }
+            else
+            {
+                MessageBox.Show("Kies eerst twee stations");
+            }
+            
         }
 
         void btnUpdate_Click(object sender, RoutedEventArgs e)

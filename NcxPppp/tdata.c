@@ -424,77 +424,11 @@ float tdata_delay_min (tdata_t *td, uint32_t route_index, uint32_t trip_index) {
 
 void tdata_dump_route(tdata_t *td, uint32_t route_idx, uint32_t trip_idx) {
 	printf("\nNot implemented in Windows!");
-    /*uint32_t *stops = tdata_stops_for_route(td, route_idx);
-    route_t route = td->routes[route_idx];
-    printf("\nRoute details for %s %s %s '%s %s' [%d] (n_stops %d, n_trips %d)\n", tdata_agency_name_for_route(td, route_idx),
-        tdata_agency_id_for_route(td, route_idx), tdata_agency_url_for_route(td, route_idx),
-        tdata_shortname_for_route(td, route_idx), tdata_headsign_for_route(td, route_idx), route_idx, route.n_stops, route.n_trips);
-    printf("tripid, stop sequence, stop name (index), departures  \n");
-    for (uint32_t ti = (trip_idx == NONE ? 0 : trip_idx); ti < (trip_idx == NONE ? route.n_trips : trip_idx + 1); ++ti) {
-        // TODO should this really be a 2D array ?
-#ifdef WIN32
-		stoptime_t (*times)[route.n_stops] = (void*) tdata_timedemand_type(td, route_idx, ti);
-#else
-        stoptime_t (*times)[route.n_stops] = (void*) tdata_timedemand_type(td, route_idx, ti);
-#endif
-        printf("%s ", tdata_trip_id_for_index(td, route.trip_ids_offset + ti));
-        for (uint32_t si = 0; si < route.n_stops; ++si) {
-            char *stop_id = tdata_stop_name_for_index (td, stops[si]);
-            printf("%4d %35s [%06d] : %s", si, stop_id, stops[si], timetext(times[0][si].departure + td->trips[route.trip_ids_offset + ti].begin_time + RTIME_ONE_DAY));
-         }
-         printf("\n");
-    }
-    printf("\n");*/
 }
 
-#if 0
 void tdata_dump(tdata_t *td) {
-    printf("\nCONTEXT\n"
-           "n_stops: %d\n"
-           "n_routes: %d\n", td->n_stops, td->n_routes);
-    printf("\nSTOPS\n");
-    for (uint32_t i = 0; i < td->n_stops; i++) {
-        printf("stop %d at lat %f lon %f\n", i, td->stop_coords[i].lat, td->stop_coords[i].lon);
-        stop_t s0 = td->stops[i];
-        stop_t s1 = td->stops[i+1];
-        uint32_t j0 = s0.stop_routes_offset;
-        uint32_t j1 = s1.stop_routes_offset;
-        uint32_t j;
-        printf("served by routes ");
-        for (j=j0; j<j1; ++j) {
-            printf("%d ", td->stop_routes[j]);
-        }
-        printf("\n");
-    }
-    printf("\nROUTES\n");
-    for (uint32_t i = 0; i < td->n_routes; i++) {
-        printf("route %d\n", i);
-        printf("having trips %d\n", td->routes[i].n_trips);
-        route_t r0 = td->routes[i];
-        route_t r1 = td->routes[i+1];
-        uint32_t j0 = r0.route_stops_offset;
-        uint32_t j1 = r1.route_stops_offset;
-        uint32_t j;
-        printf("serves stops ");
-        for (j=j0; j<j1; ++j) {
-            printf("%d ", td->route_stops[j]);
-        }
-        printf("\n");
-    }
-    printf("\nSTOPIDS\n");
-    for (uint32_t i = 0; i < td->n_stops; i++) {
-        printf("stop %03d has id %s \n", i, tdata_stop_name_for_index(td, i));
-    }
-#if 0
-    printf("\nROUTEIDS, TRIPIDS\n");
-    for (uint32_t i = 0; i < td->n_routes; i++) {
-        printf("route %03d has id %s and first trip id %s \n", i, 
-            tdata_route_desc_for_index(td, i),
-            tdata_trip_ids_for_route(td, i));
-    }
-#endif
+	printf("\nNot implemented in Windows!");
 }
-#endif
 
 #ifdef REALTIME
 /* 

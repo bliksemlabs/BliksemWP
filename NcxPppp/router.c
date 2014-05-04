@@ -213,36 +213,7 @@ apply_transfers (router_t *router, router_request_t *req, uint32_t round) {
 }
 
 static void dump_results(router_t *router) {
-    /*router_state_t (*states)[router->tdata->n_stops] = (void*) router->states;
-    // char id_fmt[10];
-    // sprintf(id_fmt, "%%%ds", router->tdata->stop_id_width);
-    char *id_fmt = "%30.30s";
-    printf("\nRouter states:\n");
-    printf(id_fmt, "Stop name");
-    printf(" [sindex]");
-    for (uint32_t r = 0; r < RRRR_MAX_ROUNDS; ++r){
-        printf("  round %d   walk %d", r, r);
-    }
-    printf("\n");
-    for (uint32_t stop = 0; stop < router->tdata->n_stops; ++stop) {
-        bool set = false;
-        for (uint32_t round = 0; round < RRRR_MAX_ROUNDS; ++round) {
-            if (states[round][stop].walk_time != UNREACHED) {
-                set = true;
-                break;
-            } 
-        }
-        if ( ! set) continue;
-        char *stop_id = tdata_stop_name_for_index (router->tdata, stop);
-        printf(id_fmt, stop_id);
-        printf(" [%6d]", stop);
-        for (uint32_t round = 0; round < RRRR_MAX_ROUNDS; ++round) {
-            printf(" %8s", timetext(states[round][stop].time));
-            printf(" %8s", timetext(states[round][stop].walk_time));
-        }
-        printf("\n");
-    }
-    printf("\n");*/
+    // TODO: Not ported, probably not used
 }
 
 // WARNING we are not currently storing trip IDs so this will segfault
@@ -894,7 +865,7 @@ void router_result_to_plan (struct plan *plan, router_t *router, router_request_
 
 static char *plan_render_itinerary (struct itinerary *itin, tdata_t *tdata, char *b, char *b_end) {
     struct leg *leg;
-    b += sprintf_s (b, 16, "\nITIN %d rides \n", itin->n_rides);
+    b += sprintf_s (b, 19, "===\nITIN %d rides \n", itin->n_rides);
 
     /* Render the legs of this itinerary, which are in chronological order */
     for (leg = itin->legs; leg < itin->legs + itin->n_legs; ++leg) {

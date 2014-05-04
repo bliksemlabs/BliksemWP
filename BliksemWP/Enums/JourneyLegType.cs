@@ -3,12 +3,13 @@
     public enum JourneyLegType
     {
         WALK,
+        TRAM,
+        SUBWAY,
         RAIL,
         BUS,
-        WAIT,
-        TRAM,
-        METRO,
-        BOAT,
-        FERRY
+        FERRY,
+        CABLE_CAR,
+        GONDOLA,
+        FUNICULAR
     }
 }

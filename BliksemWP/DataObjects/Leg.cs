@@ -7,7 +7,7 @@ using BliksemWP.Enums;
 
 namespace BliksemWP.DataObjects
 {
-    public class JourneyLeg
+    public class Leg
     {
         public JourneyLegType JourneyType { get; set; }
 

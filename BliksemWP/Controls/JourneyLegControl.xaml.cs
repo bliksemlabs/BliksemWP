@@ -13,9 +13,9 @@ namespace BliksemWP.Controls
 {
     public partial class JourneyLegControl : UserControl
     {
-        private JourneyLeg Leg;
+        private Leg Leg;
 
-        public JourneyLegControl(JourneyLeg theLeg)
+        public JourneyLegControl(Leg theLeg)
         {
             InitializeComponent();
             Leg = theLeg;

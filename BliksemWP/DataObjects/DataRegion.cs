@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace BliksemWP.DataObjects
 {
+    /*
+     * Store seperate regions of data (i.e NL, BE, CH)
+     */
     class DataRegion
     {
         public string CountryLong { get; set; }
