@@ -38,9 +38,16 @@
                         <ListBox x:Name="LegList" Margin="5,0,0,10" Grid.Row="0" ItemsSource="{Binding Legs}" ScrollViewer.VerticalScrollBarVisibility="Disabled">
                                 <ListBox.ItemTemplate>
                                     <DataTemplate>
-                                        <local:JourneyLegControl Margin="0,0,0,10" HorizontalAlignment="Stretch" DataContext="{Binding}" />
+                                        <local:JourneyLegControl Margin="0,0,0,10" HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch" DataContext="{Binding}" />
                                     </DataTemplate>
                                 </ListBox.ItemTemplate>
+                                <!-- This style makes the boxes fill the space-->
+                                <ListBox.ItemContainerStyle>
+                                    <Style TargetType="ListBoxItem">
+                                        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                                        <Setter Property="HorizontalAlignment" Value="Stretch" />
+                                    </Style>
+                                </ListBox.ItemContainerStyle>
                             </ListBox>
                         <StackPanel Grid.Row="1">
                             <Button Name="btnAddCalendar" Content="Add to Calendar" HorizontalAlignment="Stretch" VerticalAlignment="Bottom"
