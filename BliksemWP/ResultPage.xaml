@@ -29,24 +29,27 @@
             </phone:Pivot.HeaderTemplate>
             <phone:Pivot.ItemTemplate>
                 <DataTemplate>
+                    <ScrollViewer>
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
-                        <ListBox x:Name="LegList" Margin="5,0,0,10" Grid.Row="1" ItemsSource="{Binding Legs}" >
+                        <ListBox x:Name="LegList" Margin="5,0,0,10" Grid.Row="0" ItemsSource="{Binding Legs}" ScrollViewer.VerticalScrollBarVisibility="Disabled">
                                 <ListBox.ItemTemplate>
                                     <DataTemplate>
-                                        <local:JourneyLegControl Margin="0,0,0,10" Width="Auto" HorizontalAlignment="Stretch" DataContext="{Binding}" />
+                                        <local:JourneyLegControl Margin="0,0,0,10" HorizontalAlignment="Stretch" DataContext="{Binding}" />
                                     </DataTemplate>
                                 </ListBox.ItemTemplate>
                             </ListBox>
-                            <Button Name="btnAddCalendar" Grid.Row="2" Content="Add to Calendar" HorizontalAlignment="Center" VerticalAlignment="Top"
+                        <StackPanel Grid.Row="1">
+                            <Button Name="btnAddCalendar" Content="Add to Calendar" HorizontalAlignment="Stretch" VerticalAlignment="Bottom"
                                         Click="btnAddCalendar_Click" Height="Auto"/>
-                            <Button Name="btnShare" Grid.Row="3" Content="Add to Calendar" HorizontalAlignment="Center" VerticalAlignment="Top"
+                            <Button Name="btnShare" Content="Share" HorizontalAlignment="Stretch" VerticalAlignment="Bottom"
                                         Click="btnShare_Click" Height="Auto"/>
+                        </StackPanel>
                     </Grid>
+                    </ScrollViewer>
                 </DataTemplate>
             </phone:Pivot.ItemTemplate>
         </phone:Pivot>

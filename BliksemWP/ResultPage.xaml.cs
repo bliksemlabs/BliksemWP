@@ -10,6 +10,7 @@ using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using BliksemWP.Helpers;
 using BliksemWP.DataObjects;
+using Microsoft.Phone.Tasks;
 
 namespace BliksemWP
 {
@@ -47,12 +48,37 @@ namespace BliksemWP
 
         private void btnShare_Click(object sender, RoutedEventArgs e)
         {
-            Console.WriteLine(e.ToString());
+            Button shareButton = (Button)sender;
+            if (shareButton.DataContext is Journey)
+            {
+                Journey shareJourney = (Journey)shareButton.DataContext;
+                ShareLinkTask shareLinkTask = new ShareLinkTask();
+                shareLinkTask.Title = "Reisadvies";
+                shareLinkTask.LinkUri = new Uri("http://1313.nl", UriKind.Absolute);
+                shareLinkTask.Message = "Dit is een reisadvies met "+ shareJourney.Transfers + "overstappen";
+                shareLinkTask.Show();
+            }
         }
 
         private void btnAddCalendar_Click(object sender, RoutedEventArgs e)
         {
-            Console.WriteLine(e.ToString());
+            Button calendarButton = (Button)sender;
+            if (calendarButton.DataContext is Journey)
+            {
+                Journey calendarJourney = (Journey)calendarButton.DataContext;
+                SaveAppointmentTask saveAppointmentTask = new SaveAppointmentTask();
+
+                saveAppointmentTask.StartTime = calendarJourney.Legs[0].DepartureTime;
+                saveAppointmentTask.EndTime = calendarJourney.Legs[calendarJourney.Legs.Count - 1].ArrivalTime;
+                saveAppointmentTask.Subject = calendarJourney.Legs[0].Departure + " naar " + calendarJourney.Legs[calendarJourney.Legs.Count-1].Arrival;
+                saveAppointmentTask.Location = calendarJourney.Legs[0].Departure;
+                saveAppointmentTask.Details = "Reisadvies hier";
+                saveAppointmentTask.IsAllDayEvent = false;
+                saveAppointmentTask.Reminder = Reminder.FifteenMinutes;
+                saveAppointmentTask.AppointmentStatus = Microsoft.Phone.UserData.AppointmentStatus.Busy;
+
+                saveAppointmentTask.Show();
+            }
         }
     }
 }
