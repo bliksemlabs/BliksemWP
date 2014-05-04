@@ -60,6 +60,7 @@ namespace BliksemWP.Helpers
             try
             {
                 journeyLeg.DepartureTime = DateTime.ParseExact(columns[5], format, CultureInfo.InvariantCulture);
+                // TODO - fix this round midnight - times are plus one day
                 journeyLeg.ArrivalTime = DateTime.ParseExact(columns[6], format, CultureInfo.InvariantCulture);
             }
             catch (FormatException f)

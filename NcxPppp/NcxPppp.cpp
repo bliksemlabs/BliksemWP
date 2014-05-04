@@ -14,21 +14,20 @@ namespace NcxPppp
 {
 
 	LibRrrr::LibRrrr() {	
-		//Platform::Details::Debug::WriteLine("Blah1!");
-		OutputDebugString(L"Init\n");
+
 	}
 	
-	Platform::String^ LibRrrr::route(Platform::String^ path, int from, int to, double time, uint8 arriveBy) {
+	Platform::String^ LibRrrr::route(Platform::String^ path, int from, int to, uint32 time, uint8 arriveBy) {
 		tdata_t tdata;
 		auto pathConverted = PlatformStringToCharArray(path);
 		tdata_load(pathConverted.get(), &tdata);
 		router_request_t req;
 		router_request_initialize(&req);
-		router_request_randomize(&req, &tdata);
+
 		req.from = from;
 		req.to = to;
-		req.time = time;
-		req.arrive_by = 0;
+		router_request_from_epoch(&req, &tdata, time);	
+		req.arrive_by = arriveBy;
 
 		router_t router;
 		router_setup(&router, &tdata);
@@ -36,7 +35,7 @@ namespace NcxPppp
 		char result_buf[OUTPUT_LEN];
 		router_result_dump(&router, &req, result_buf, OUTPUT_LEN);
 
-		// Debug
+		// Do string magic
 		int size = MultiByteToWideChar(CP_ACP, 0, result_buf, -1, NULL, 0);
 		if (size > 0) {
 			WCHAR* message = new WCHAR[size];

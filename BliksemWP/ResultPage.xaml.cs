@@ -45,12 +45,17 @@ namespace BliksemWP
             }
             
             var router = new NcxPppp.LibRrrr();
-            double seconds = (requestTime - new DateTime(1970, 1, 1).ToLocalTime()).TotalSeconds;
+            UInt32 seconds = Convert.ToUInt32((requestTime - new DateTime(1970, 1, 1).ToLocalTime()).TotalSeconds);
             var reisadvies = router.route(App.DATA_FILE_PATH, fromStopId, toStopId, seconds, 0);
             if (reisadvies.Length > 1) {
                 ResultConverter c = new ResultConverter(reisadvies);
                 PivotHolder.ItemsSource = c.Journeys; // Databinding does the rest
             }
+            else
+            {
+                MessageBox.Show("Fout tijdens berekenen reisadvies. Probeer andere parameters");
+            }
+
             progressBar.Visibility = Visibility.Collapsed;            
         }
 
