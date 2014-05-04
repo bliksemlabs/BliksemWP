@@ -15,60 +15,65 @@
     SupportedOrientations="Portrait" Orientation="Portrait"
     shell:SystemTray.IsVisible="True">
 
-    <Grid x:Name="LayoutRoot" Background="Transparent">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
+    <ScrollViewer x:Name="LayoutRoot" Height="768">
+        <Grid Background="Transparent" Height="1000">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
 
-        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
-            <TextBlock Text="{Binding Path=LocalizedResources.AppTitle, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextNormalStyle}" Margin="12,0"/>
-            <TextBlock Text="{Binding Path=LocalizedResources.MainPageTitle, Source={StaticResource LocalizedStrings}}" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
-        </StackPanel>
+            <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
+                <TextBlock Text="{Binding Path=LocalizedResources.AppTitle, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextNormalStyle}" Margin="12,0"/>
+                <TextBlock Text="{Binding Path=LocalizedResources.MainPageTitle, Source={StaticResource LocalizedStrings}}" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+            </StackPanel>
 
-        <StackPanel x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-            <TextBlock Margin="12,0,12,0">Van</TextBlock>
-            <toolkit:AutoCompleteBox HorizontalAlignment="Left" Width="455"
+            <StackPanel x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+                <TextBlock Margin="12,0,12,0">Van</TextBlock>
+                <toolkit:AutoCompleteBox HorizontalAlignment="Left" Width="455"
                                FilterMode="None"
                                MinimumPopulateDelay="150"
                                Name="from" VerticalAlignment="Top"
-                               Populating="Stops_Populating" />
-            <TextBlock Margin="12,0,12,0">Naar</TextBlock>
-            <toolkit:AutoCompleteBox HorizontalAlignment="Left"  Width="455"                                   
+                               Populating="Stops_Populating" 
+                                         GotFocus="TextBox_GotFocus" LostFocus="TextBox_LostFocus"
+                                         />
+                <TextBlock Margin="12,0,12,0">Naar</TextBlock>
+                <toolkit:AutoCompleteBox HorizontalAlignment="Left"  Width="455"                                   
                                FilterMode="None"
                                MinimumPopulateDelay="150"
                                Name="to" VerticalAlignment="Top"
-                               Populating="Stops_Populating"/>
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
-                <TextBlock Grid.Row="0" Margin="12,0,12,0" HorizontalAlignment="Left" 
+                               Populating="Stops_Populating"
+                                         GotFocus="TextBox_GotFocus" LostFocus="TextBox_LostFocus"
+                                         />
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" Margin="12,0,12,0" HorizontalAlignment="Left" 
                                     Width="180">Datum</TextBlock>
-                <TextBlock Grid.Row="0" Margin="0,0,12,0"
+                    <TextBlock Grid.Row="0" Margin="0,0,12,0"
                            HorizontalAlignment="Right"
                            Width="158">Tijd</TextBlock>
 
-                <toolkit:DatePicker x:Name="datePicker" Margin="0" Grid.Row="1" 
+                    <toolkit:DatePicker x:Name="datePicker" Margin="0" Grid.Row="1" 
                                      HorizontalAlignment="Left" 
                                     Width="180" />
-                <toolkit:TimePicker x:Name="timePicker"  
+                    <toolkit:TimePicker x:Name="timePicker"  
                                     Grid.Row="1" Width="180" HorizontalAlignment="Right"
                                     Margin="0" VerticalAlignment="Center"/>
-                <RadioButton Grid.Row="2" IsChecked="True" GroupName="VA" 
+                    <RadioButton Grid.Row="2" IsChecked="True" GroupName="VA" 
                              x:Name="vertrek">Vertrek</RadioButton>
-                <RadioButton Grid.Row="2" x:Name="aankomst" GroupName="VA"
+                    <RadioButton Grid.Row="2" x:Name="aankomst" GroupName="VA"
                              HorizontalAlignment="Right"
                                     Margin="0">Aankomst</RadioButton>
-            </Grid>
+                </Grid>
 
-            <StackPanel Orientation="Horizontal">
+                <Button x:Name="btnStart" Click="btnStart_Click" Content="Plan!"/>
+                <Button x:Name="btnupdate" Click="btnUpdate_Click" Content="Laad nieuwe data"/>
+
             </StackPanel>
-            <Button x:Name="btnStart" Click="btnStart_Click">Plan!</Button>
-            <Button x:Name="btnupdate" Click="btnUpdate_Click" Content="Laad nieuwe data"/>
+        </Grid>
+    </ScrollViewer>
 
-        </StackPanel>
-    </Grid>
 </phone:PhoneApplicationPage>
