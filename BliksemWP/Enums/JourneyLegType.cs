@@ -2,6 +2,7 @@
 {
     public enum JourneyLegType
     {
+        WAIT,
         WALK,
         TRAM,
         SUBWAY,

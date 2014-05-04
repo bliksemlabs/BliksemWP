@@ -40,14 +40,19 @@ namespace BliksemWP
             var reisadvies = router.route(App.DATA_FILE_PATH, fromStopId, toStopId);
             if (reisadvies.Length > 1) {
                 ResultConverter c = new ResultConverter(reisadvies);
-                List<Leg> journeyLegs = c.GetLegs();
-                foreach (Leg leg in journeyLegs) {
-                    spJourneyLegs.Children.Add(new JourneyLegControl(leg));
-                }
-                DepartureName.Text = journeyLegs[0].Departure;
-                ArrivalName.Text = journeyLegs[journeyLegs.Count - 1].Arrival;
+                PivotHolder.ItemsSource = c.Journeys; // Databinding does the rest
             }
             
+        }
+
+        private void btnShare_Click(object sender, RoutedEventArgs e)
+        {
+            Console.WriteLine(e.ToString());
+        }
+
+        private void btnAddCalendar_Click(object sender, RoutedEventArgs e)
+        {
+            Console.WriteLine(e.ToString());
         }
     }
 }

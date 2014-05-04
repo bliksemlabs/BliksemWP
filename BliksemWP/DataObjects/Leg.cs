@@ -9,7 +9,7 @@ namespace BliksemWP.DataObjects
 {
     public class Leg
     {
-        public JourneyLegType JourneyType { get; set; }
+        public JourneyLegType LegType { get; set; }
 
         public String Agency { get; set; }        
 
@@ -21,6 +21,20 @@ namespace BliksemWP.DataObjects
         public String Headsign { get; set; }
         public String ProductCategory { get; set; }
         public String ProductName { get; set; }
+
+        public String ProductDescription
+        {
+            get
+            {
+                if (LegType == JourneyLegType.WALK) {
+                    return "Loop";
+                } else if(LegType == JourneyLegType.WAIT) {
+                    return "Overstap";
+                } else {
+                    return Agency + " " + ProductName + " naar " + Headsign;
+                }
+            }
+        }
 
     }
 }
