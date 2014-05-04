@@ -15,7 +15,8 @@
     SupportedOrientations="Portrait" Orientation="Portrait"
     shell:SystemTray.IsVisible="True">
 
-    <Grid x:Name="LayoutRoot" Background="Transparent">
+    <ScrollViewer x:Name="LayoutRoot" Height="768">
+        <Grid Background="Transparent" Height="1000">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
@@ -32,13 +33,17 @@
                                FilterMode="None"
                                MinimumPopulateDelay="150"
                                Name="from" VerticalAlignment="Top"
-                               Populating="Stops_Populating" />
+                               Populating="Stops_Populating" 
+                                         GotFocus="TextBox_GotFocus" LostFocus="TextBox_LostFocus"
+                                         />
             <TextBlock Margin="12,0,12,0">Naar</TextBlock>
             <toolkit:AutoCompleteBox HorizontalAlignment="Left"  Width="455"                                   
                                FilterMode="None"
                                MinimumPopulateDelay="150"
                                Name="to" VerticalAlignment="Top"
-                               Populating="Stops_Populating"/>
+                               Populating="Stops_Populating"
+                                         GotFocus="TextBox_GotFocus" LostFocus="TextBox_LostFocus"
+                                         />
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
@@ -67,8 +72,10 @@
             <StackPanel Orientation="Horizontal">
             </StackPanel>
             <Button x:Name="btnStart" Click="btnStart_Click">Plan!</Button>
-            <Button x:Name="btnupdate" Click="btnUpdate_Click" Content="Laad nieuwe data" IsEnabled="False" VerticalAlignment="Bottom"/>
+            <Button x:Name="btnupdate" Click="btnUpdate_Click" Content="Laad nieuwe data"/>
 
         </StackPanel>
     </Grid>
+    </ScrollViewer>
+
 </phone:PhoneApplicationPage>

@@ -11,6 +11,7 @@
         FERRY,
         CABLE_CAR,
         GONDOLA,
-        FUNICULAR
+        FUNICULAR,
+        WAIT,
     }
 }

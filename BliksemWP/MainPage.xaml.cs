@@ -25,7 +25,18 @@ namespace BliksemWP
         public MainPage()
         {
             InitializeComponent();
+            LayoutRoot.VerticalScrollBarVisibility = ScrollBarVisibility.Disabled;
             SetupDB();
+        }
+
+        private void TextBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            LayoutRoot.VerticalScrollBarVisibility = ScrollBarVisibility.Visible;
+        }
+
+        private void TextBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            LayoutRoot.VerticalScrollBarVisibility = ScrollBarVisibility.Disabled;
         }
 
         async void SetupDB()
