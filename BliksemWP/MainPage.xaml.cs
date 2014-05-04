@@ -69,7 +69,8 @@ namespace BliksemWP
             List<Stop> items = new List<Stop>();
 
             // Prepare a SQL statement to be executed
-            var statement = await this.db.PrepareStatementAsync("SELECT stopindex, stopname FROM stops_fts WHERE stopname MATCH ?;");
+            // RANK? ORDER BY rank(matchinfo(stops_fts)) DESC 
+            var statement = await this.db.PrepareStatementAsync("SELECT stopindex, stopname FROM stops_fts WHERE stopname MATCH ? LIMIT 50 OFFSET 0;");
             string formattedText = "*" + searchText.Trim().Replace(" ", "* *") + "*";
             statement.BindTextParameterAt(1, formattedText);
 
