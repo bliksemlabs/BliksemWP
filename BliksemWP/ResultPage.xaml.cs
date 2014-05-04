@@ -27,6 +27,7 @@ namespace BliksemWP
 
         void ResultPage_Loaded(object sender, RoutedEventArgs e)
         {
+            progressBar.Visibility = Visibility.Visible;
             String fromString, toString;
             if (NavigationContext.QueryString.TryGetValue("from", out fromString))
             {
@@ -43,7 +44,7 @@ namespace BliksemWP
                 ResultConverter c = new ResultConverter(reisadvies);
                 PivotHolder.ItemsSource = c.Journeys; // Databinding does the rest
             }
-            
+            progressBar.Visibility = Visibility.Collapsed;            
         }
 
         private void btnShare_Click(object sender, RoutedEventArgs e)

@@ -96,6 +96,8 @@
     <Compile Include="Controls\JourneyLegControl.xaml.cs">
       <DependentUpon>JourneyLegControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
+    <Compile Include="Converters\DateTimeToTimeStringConverter.cs" />
     <Compile Include="DataObjects\Journey.cs" />
     <Compile Include="DataObjects\DataRegion.cs" />
     <Compile Include="DataObjects\JourneyList.cs" />

@@ -60,7 +60,7 @@ namespace BliksemWP
             }
             else
             {
-                MessageBox.Show("Kies eerst twee stations");
+                MessageBox.Show(AppResources.MainPage_Error_ChooseStops);
             }
             
         }

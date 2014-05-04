@@ -12,6 +12,5 @@
         CABLE_CAR,
         GONDOLA,
         FUNICULAR,
-        WAIT,
     }
 }

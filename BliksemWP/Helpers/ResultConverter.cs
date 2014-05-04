@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using BliksemWP.DataObjects;
 using BliksemWP.Enums;
 using System.Globalization;
@@ -11,8 +9,8 @@ namespace BliksemWP.Helpers
 {
     class ResultConverter
     {
-        public JourneyList Journeys { get; private set;  }
-        
+        public JourneyList Journeys { get; private set; }
+
         public ResultConverter(string source)
         {
             Journeys = new JourneyList();
@@ -22,7 +20,7 @@ namespace BliksemWP.Helpers
             {
                 Journeys.Add(GetJourney(journey));
             }
-                       
+
         }
 
         private Journey GetJourney(string source)
@@ -34,9 +32,12 @@ namespace BliksemWP.Helpers
             for (int i = 0; i < lines.Count(); i++)
             {
                 // Ignore the ITIN line
-                if (i == 0) {
+                if (i == 0)
+                {
                     j.Transfers = Convert.ToInt32(lines[0].Split(' ')[1]);
-                } else {
+                }
+                else
+                {
                     j.Legs.Add(GetJourneyLeg(lines[i]));
                 }
             }
@@ -52,7 +53,7 @@ namespace BliksemWP.Helpers
         private static Leg GetJourneyLeg(string line)
         {
             Leg journeyLeg = new Leg();
-            var columns = line.Split(new [] {";"}, StringSplitOptions.None);
+            var columns = line.Split(new[] { ";" }, StringSplitOptions.None);
             journeyLeg.LegType = (JourneyLegType)Enum.Parse(typeof(JourneyLegType), columns[0]);
 
             String format = "HH:mm:ss";
@@ -60,7 +61,9 @@ namespace BliksemWP.Helpers
             {
                 journeyLeg.DepartureTime = DateTime.ParseExact(columns[5], format, CultureInfo.InvariantCulture);
                 journeyLeg.ArrivalTime = DateTime.ParseExact(columns[6], format, CultureInfo.InvariantCulture);
-            } catch (FormatException f) {
+            }
+            catch (FormatException f)
+            {
                 Console.Write("Couldn't read " + columns[5], f);
             }
 
@@ -75,6 +78,4 @@ namespace BliksemWP.Helpers
             return journeyLeg;
         }
     }
-
-
 }

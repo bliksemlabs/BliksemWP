@@ -23,12 +23,12 @@
             </Grid.RowDefinitions>
 
             <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
-                <TextBlock Text="{Binding Path=LocalizedResources.AppTitle, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextNormalStyle}" Margin="12,0"/>
-                <TextBlock Text="{Binding Path=LocalizedResources.MainPageTitle, Source={StaticResource LocalizedStrings}}" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+                <TextBlock Text="{Binding Path=LocalizedResources.General_AppTitle, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextNormalStyle}" Margin="12,0"/>
+                <TextBlock Text="{Binding Path=LocalizedResources.MainPage_Title, Source={StaticResource LocalizedStrings}}" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
             </StackPanel>
 
             <StackPanel x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-                <TextBlock Margin="12,0,12,0">Van</TextBlock>
+                <TextBlock Margin="12,0,12,0" Text="{Binding Path=LocalizedResources.MainPage_From, Source={StaticResource LocalizedStrings}}"/>
                 <toolkit:AutoCompleteBox HorizontalAlignment="Left" Width="455"
                                FilterMode="None"
                                MinimumPopulateDelay="150"
@@ -36,7 +36,7 @@
                                Populating="Stops_Populating" 
                                          GotFocus="TextBox_GotFocus" LostFocus="TextBox_LostFocus"
                                          />
-                <TextBlock Margin="12,0,12,0">Naar</TextBlock>
+                <TextBlock Margin="12,0,12,0" Text="{Binding Path=LocalizedResources.MainPage_To, Source={StaticResource LocalizedStrings}}"/>
                 <toolkit:AutoCompleteBox HorizontalAlignment="Left"  Width="455"                                   
                                FilterMode="None"
                                MinimumPopulateDelay="150"
@@ -51,26 +51,27 @@
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
                     <TextBlock Grid.Row="0" Margin="12,0,12,0" HorizontalAlignment="Left" 
-                                    Width="180">Datum</TextBlock>
+                               Text="{Binding Path=LocalizedResources.MainPage_Date, Source={StaticResource LocalizedStrings}}"
+                                    Width="180"/>
                     <TextBlock Grid.Row="0" Margin="0,0,12,0"
                            HorizontalAlignment="Right"
-                           Width="158">Tijd</TextBlock>
+                           Width="158" Text="{Binding Path=LocalizedResources.MainPage_Time, Source={StaticResource LocalizedStrings}}"/>
 
                     <toolkit:DatePicker x:Name="datePicker" Margin="0" Grid.Row="1" 
-                                     HorizontalAlignment="Left" 
+                                     HorizontalAlignment="Left"  
                                     Width="180" />
                     <toolkit:TimePicker x:Name="timePicker"  
                                     Grid.Row="1" Width="180" HorizontalAlignment="Right"
                                     Margin="0" VerticalAlignment="Center"/>
-                    <RadioButton Grid.Row="2" IsChecked="True" GroupName="VA" 
-                             x:Name="vertrek">Vertrek</RadioButton>
+                    <RadioButton Grid.Row="2" IsChecked="True" GroupName="VA" Content="{Binding Path=LocalizedResources.MainPage_GivenTimeIsDeparture, Source={StaticResource LocalizedStrings}}"
+                             x:Name="vertrek"/>
                     <RadioButton Grid.Row="2" x:Name="aankomst" GroupName="VA"
-                             HorizontalAlignment="Right"
-                                    Margin="0">Aankomst</RadioButton>
+                             HorizontalAlignment="Right" Content="{Binding Path=LocalizedResources.MainPage_GivenTimeIsArrival, Source={StaticResource LocalizedStrings}}"
+                                    Margin="0"/>
                 </Grid>
 
-                <Button x:Name="btnStart" Click="btnStart_Click" Content="Plan!"/>
-                <Button x:Name="btnupdate" Click="btnUpdate_Click" Content="Laad nieuwe data"/>
+                <Button x:Name="btnStart" Click="btnStart_Click" Content="{Binding Path=LocalizedResources.MainPage_Calculate, Source={StaticResource LocalizedStrings}}"/>
+                <Button x:Name="btnupdate" Click="btnUpdate_Click" Content="{Binding Path=LocalizedResources.MainPage_Update, Source={StaticResource LocalizedStrings}}"/>
 
             </StackPanel>
         </Grid>

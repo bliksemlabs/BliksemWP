@@ -22,14 +22,14 @@
 
         <!--TitlePanel contains the name of the application and page title-->
         <StackPanel Grid.Row="0" Margin="12,17,0,28">
-            <TextBlock Text="{Binding Path=LocalizedResources.AppTitle, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextNormalStyle}"/>
-            <TextBlock Text="{Binding Path=LocalizedResources.DownloadUpdatePageTitle, Source={StaticResource LocalizedStrings}}" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+            <TextBlock Text="{Binding Path=LocalizedResources.General_AppTitle, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextNormalStyle}"/>
+            <TextBlock Text="{Binding Path=LocalizedResources.DownloadUpdatePage_Title, Source={StaticResource LocalizedStrings}}" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
         </StackPanel>
 
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
             <ProgressBar HorizontalAlignment="Left" Margin="0,10,-29,0" VerticalAlignment="Top" IsIndeterminate="True" Name="ProgressBar"/>
-            <TextBlock Text="{Binding Path=LocalizedResources.UpdateInProgress, Source={StaticResource LocalizedStrings}}" />
+            <TextBlock Text="{Binding Path=LocalizedResources.DownloadUpdatePage_UpdateInProgress, Source={StaticResource LocalizedStrings}}" />
         </Grid>
     </Grid>
 

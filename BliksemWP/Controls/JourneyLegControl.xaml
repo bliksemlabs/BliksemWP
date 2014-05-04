@@ -3,12 +3,17 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:converters="clr-namespace:BliksemWP.Converters"
     mc:Ignorable="d"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     d:DesignHeight="480" d:DesignWidth="480">
-    
+
+    <UserControl.Resources>
+        <converters:DateTimeToTimeStringConverter x:Key="DateTimeToTimeStringConverter"/>
+    </UserControl.Resources>
+
     <Grid x:Name="LayoutRoot" Background="{StaticResource PhoneChromeBrush}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -22,7 +27,7 @@
         </Grid.ColumnDefinitions>
         <Image Source="/Images/appbar.train.png" Grid.Column="0" Grid.Row="0"/>
         <TextBlock Grid.Row="0" Grid.Column="1"
-                           HorizontalAlignment="Left" Text="11:49"
+                           HorizontalAlignment="Left" Text="{Binding DepartureTime, Converter={StaticResource DateTimeToTimeStringConverter}}"
                            Name="DepartureTime"
                            Width="100" FontFamily="Segoe WP Semibold"/>
         <TextBlock Grid.Row="0" Grid.Column="2" 
@@ -34,7 +39,7 @@
                            Text="{Binding ProductDescription}"   
                            HorizontalAlignment="Left" FontFamily="Segoe WP Light" />
         <TextBlock Grid.Row="2" Grid.Column="1"
-                           HorizontalAlignment="Left" Text="12:03" 
+                           HorizontalAlignment="Left" Text="{Binding ArrivalTime, Converter={StaticResource DateTimeToTimeStringConverter}}"
                            Name="ArrivalTime"
                            Width="100" FontFamily="Segoe WP Semibold"/>
         <Image Source="/Images/appbar.train.png" Grid.Column="0" Grid.Row="2"/>

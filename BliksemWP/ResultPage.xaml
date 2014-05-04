@@ -18,10 +18,11 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
+        <ProgressBar Name="progressBar" IsIndeterminate="True" Height="40" />
 
         <phone:Pivot Name="PivotHolder" HorizontalAlignment="Stretch"
-                     Margin="10,0,0,0" Grid.Row="1" 
-                     Title="reismogelijkheden" VerticalAlignment="Stretch">
+                     Margin="10,0,0,0" Grid.Row="0" 
+                     Title="{Binding Path=LocalizedResources.ResultPage_Title, Source={StaticResource LocalizedStrings}}"  VerticalAlignment="Stretch">
             <phone:Pivot.HeaderTemplate>
                 <DataTemplate>
                     <ContentControl Content="{Binding}"/>
@@ -43,9 +44,9 @@
                                 </ListBox.ItemTemplate>
                             </ListBox>
                         <StackPanel Grid.Row="1">
-                            <Button Name="btnAddCalendar" Content="Add to Calendar" HorizontalAlignment="Stretch" VerticalAlignment="Bottom"
+                                <Button Name="btnAddCalendar" Content="{Binding Path=LocalizedResources.ResultPage_AddToCalendarButton, Source={StaticResource LocalizedStrings}}" HorizontalAlignment="Stretch" VerticalAlignment="Bottom"
                                         Click="btnAddCalendar_Click" Height="Auto"/>
-                            <Button Name="btnShare" Content="Share" HorizontalAlignment="Stretch" VerticalAlignment="Bottom"
+                                <Button Name="btnShare" Content="{Binding Path=LocalizedResources.ResultPage_ShareButton, Source={StaticResource LocalizedStrings}}" HorizontalAlignment="Stretch" VerticalAlignment="Bottom"
                                         Click="btnShare_Click" Height="Auto"/>
                         </StackPanel>
                     </Grid>
