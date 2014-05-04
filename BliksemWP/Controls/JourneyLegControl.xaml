@@ -26,12 +26,12 @@
                            Name="DepartureTime"
                            Width="100" FontFamily="Segoe WP Semibold"/>
         <TextBlock Grid.Row="0" Grid.Column="2" 
-                           Text="Noordsingel"
+                           Text="{Binding Departure}"
                            Name="DepartureStop"
                            HorizontalAlignment="Left" FontFamily="Segoe WP Semibold" />
         <TextBlock Grid.Row="1" Grid.Column="2" 
-                           Text="Tram lijn 4"
                            Name="TransportName"
+                           Text="{Binding ProductDescription}"   
                            HorizontalAlignment="Left" FontFamily="Segoe WP Light" />
         <TextBlock Grid.Row="2" Grid.Column="1"
                            HorizontalAlignment="Left" Text="12:03" 
@@ -39,7 +39,7 @@
                            Width="100" FontFamily="Segoe WP Semibold"/>
         <Image Source="/Images/appbar.train.png" Grid.Column="0" Grid.Row="2"/>
         <TextBlock Grid.Row="2" Grid.Column="2" 
-                           Text="Rotterdam Centraal Station"
+                           Text="{Binding Arrival}"
                            Name="ArrivalStop"
                            HorizontalAlignment="Left" 
                            FontFamily="Segoe WP Semibold" />

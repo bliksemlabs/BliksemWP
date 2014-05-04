@@ -13,26 +13,9 @@ namespace BliksemWP.Controls
 {
     public partial class JourneyLegControl : UserControl
     {
-        private Leg Leg;
-
-        public JourneyLegControl(Leg theLeg)
+        public JourneyLegControl()
         {
-            InitializeComponent();
-            Leg = theLeg;
-            DepartureTime.Text = Leg.DepartureTime.ToShortTimeString();
-            DepartureStop.Text = Leg.Departure;
-            ArrivalTime.Text = Leg.ArrivalTime.ToShortTimeString();
-            ArrivalStop.Text = Leg.Arrival;
-
-            if (Leg.JourneyType == Enums.JourneyLegType.WALK)
-            {
-                TransportName.Text = "Loop";
-            }
-            else
-            {
-                TransportName.Text = Leg.Agency + " " + Leg.ProductName + " naar " + Leg.Headsign;
-            }
-            
+            InitializeComponent();            
         }
     }
 }

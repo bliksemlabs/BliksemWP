@@ -16,55 +16,44 @@
 
     <Grid x:Name="LayoutRoot" Background="Transparent">
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <StackPanel Grid.Row="0" Margin="12,17,0,28">
-            <TextBlock Text="{Binding Path=LocalizedResources.AppTitle, Source={StaticResource LocalizedStrings}}" Style="{StaticResource PhoneTextNormalStyle}"/>
-            <TextBlock Text="{Binding Path=LocalizedResources.ResultPageTitle, Source={StaticResource LocalizedStrings}}" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
-        </StackPanel>
-
-        <StackPanel x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="100"/>
-                    <ColumnDefinition Width="*"></ColumnDefinition>
-                </Grid.ColumnDefinitions>
-                <TextBlock Grid.Row="0" Grid.Column="0" Margin="12,0,12,0" 
-                           HorizontalAlignment="Left" Text="Van" 
-                           Width="100" FontFamily="Segoe WP Light"/>
-                <TextBlock Grid.Row="0" Grid.Column="1" 
-                           Text="Rotterdam, Noordsingel"
-                           Name="DepartureName"
-                           HorizontalAlignment="Left" FontFamily="Segoe WP Semibold" />
-                <TextBlock Grid.Row="1" Grid.Column="0" Margin="12,0,12,0" 
-                           HorizontalAlignment="Left" Text="Naar" 
-                           Width="100" FontFamily="Segoe WP Light"/>
-                <TextBlock Grid.Row="1" Grid.Column="1" 
-                           Text="Rotterdam, Centraal Station"
-                           Name="ArrivalName"
-                           HorizontalAlignment="Left" FontFamily="Segoe WP Semibold" />
-                <TextBlock Grid.Row="2" Grid.Column="0" Margin="12,0,12,0" 
-                           HorizontalAlignment="Left" Text="Op" 
-                           Width="100" FontFamily="Segoe WP Light"/>
-                <TextBlock Grid.Row="2" Grid.Column="1" 
-                           Text="Zaterdag 8 februari"
-                           HorizontalAlignment="Left" FontFamily="Segoe WP Semibold"
-                           Name="PlanDateTime"/>
-
-            </Grid>
-            <ScrollViewer Margin="12,0,12,0">
-                <StackPanel x:Name="spJourneyLegs">
-                    
-                </StackPanel>
-            </ScrollViewer>
-        </StackPanel>
+        <phone:Pivot Name="PivotHolder" HorizontalAlignment="Stretch"
+                     Margin="10,0,0,0" Grid.Row="1" 
+                     Title="reismogelijkheden" VerticalAlignment="Stretch">
+            <phone:Pivot.HeaderTemplate>
+                <DataTemplate>
+                    <ContentControl Content="{Binding}"/>
+                </DataTemplate>
+            </phone:Pivot.HeaderTemplate>
+            <phone:Pivot.ItemTemplate>
+                <DataTemplate>
+                    <ScrollViewer>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <ListBox x:Name="LegList" Margin="5,0,0,10" Grid.Row="0" ItemsSource="{Binding Legs}" ScrollViewer.VerticalScrollBarVisibility="Disabled">
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <local:JourneyLegControl Margin="0,0,0,10" HorizontalAlignment="Stretch" DataContext="{Binding}" />
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+                        <StackPanel Grid.Row="1">
+                            <Button Name="btnAddCalendar" Content="Add to Calendar" HorizontalAlignment="Stretch" VerticalAlignment="Bottom"
+                                        Click="btnAddCalendar_Click" Height="Auto"/>
+                            <Button Name="btnShare" Content="Share" HorizontalAlignment="Stretch" VerticalAlignment="Bottom"
+                                        Click="btnShare_Click" Height="Auto"/>
+                        </StackPanel>
+                    </Grid>
+                    </ScrollViewer>
+                </DataTemplate>
+            </phone:Pivot.ItemTemplate>
+        </phone:Pivot>
+        
     </Grid>
 
 </phone:PhoneApplicationPage>

@@ -11,16 +11,16 @@ namespace BliksemWP.Helpers
 {
     class ResultConverter
     {
-        private List<Journey> journeys;
+        public JourneyList Journeys { get; private set;  }
         
         public ResultConverter(string source)
         {
-            journeys = new List<Journey>();
-            var journeyStrings = source.Split(new[] { "===" }, StringSplitOptions.RemoveEmptyEntries).Select(x => x.Trim()).ToList();
+            Journeys = new JourneyList();
+            var journeyStrings = SplitTrimString(source, "===");
 
             foreach (String journey in journeyStrings)
             {
-                journeys.Add(GetJourney(journey));
+                Journeys.Add(GetJourney(journey));
             }
                        
         }
@@ -29,29 +29,31 @@ namespace BliksemWP.Helpers
         {
             Journey j = new Journey();
 
-            var lines = source.Split(new[] { "\n" }, StringSplitOptions.RemoveEmptyEntries).Select(x => x.Trim()).ToList();
+            var lines = SplitTrimString(source, "\n");
 
             for (int i = 0; i < lines.Count(); i++)
             {
                 // Ignore the ITIN line
                 if (i == 0) {
-                    continue;
+                    j.Transfers = Convert.ToInt32(lines[0].Split(' ')[1]);
+                } else {
+                    j.Legs.Add(GetJourneyLeg(lines[i]));
                 }
-                j.Legs.Add(GetJourneyLeg(lines[i]));
             }
 
             return j;
         }
-        public List<Leg> GetLegs()
+
+        private static List<string> SplitTrimString(string source, string delimeter)
         {
-            return journeys[0].Legs;
+            return source.Split(new[] { delimeter }, StringSplitOptions.RemoveEmptyEntries).Select(x => x.Trim()).ToList();
         }
 
         private static Leg GetJourneyLeg(string line)
         {
             Leg journeyLeg = new Leg();
             var columns = line.Split(new [] {";"}, StringSplitOptions.None);
-            journeyLeg.JourneyType = (JourneyLegType)Enum.Parse(typeof(JourneyLegType), columns[0]);
+            journeyLeg.LegType = (JourneyLegType)Enum.Parse(typeof(JourneyLegType), columns[0]);
 
             String format = "HH:mm:ss";
             try
