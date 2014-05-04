@@ -18,18 +18,17 @@ namespace NcxPppp
 		OutputDebugString(L"Init\n");
 	}
 	
-	Platform::String^ LibRrrr::route(Platform::String^ path, int from, int to) {
-		OutputDebugString(L"Doing routing\n");
+	Platform::String^ LibRrrr::route(Platform::String^ path, int from, int to, double time, uint8 arriveBy) {
 		tdata_t tdata;
 		auto pathConverted = PlatformStringToCharArray(path);
-		OutputDebugString(L"Loadeing timetable\n");
 		tdata_load(pathConverted.get(), &tdata);
-		OutputDebugString(L"Loaded timetable!\n");
 		router_request_t req;
 		router_request_initialize(&req);
 		router_request_randomize(&req, &tdata);
 		req.from = from;
 		req.to = to;
+		req.time = time;
+		req.arrive_by = 0;
 
 		router_t router;
 		router_setup(&router, &tdata);
@@ -42,7 +41,6 @@ namespace NcxPppp
 		if (size > 0) {
 			WCHAR* message = new WCHAR[size];
 			size = MultiByteToWideChar(CP_ACP, 0, result_buf, -1, message, size);
-			OutputDebugString(message);
 			delete[] message;
 		}
 		return ToPlatformString(result_buf, OUTPUT_LEN);

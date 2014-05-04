@@ -58,9 +58,9 @@
                            Width="158" Text="{Binding Path=LocalizedResources.MainPage_Time, Source={StaticResource LocalizedStrings}}"/>
 
                     <toolkit:DatePicker x:Name="datePicker" Margin="0" Grid.Row="1" 
-                                     HorizontalAlignment="Left"  
+                                     HorizontalAlignment="Left" 
                                     Width="180" />
-                    <toolkit:TimePicker x:Name="timePicker"  
+                <toolkit:TimePicker x:Name="timePicker"  ValueStringFormat="{}{0:t}"
                                     Grid.Row="1" Width="180" HorizontalAlignment="Right"
                                     Margin="0" VerticalAlignment="Center"/>
                     <RadioButton Grid.Row="2" IsChecked="True" GroupName="VA" Content="{Binding Path=LocalizedResources.MainPage_GivenTimeIsDeparture, Source={StaticResource LocalizedStrings}}"

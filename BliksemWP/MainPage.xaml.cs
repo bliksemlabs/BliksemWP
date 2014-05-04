@@ -56,7 +56,8 @@ namespace BliksemWP
             Stop fromStop = (Stop) from.SelectedItem;
             Stop toStop = (Stop) to.SelectedItem;
             if (fromStop != null && toStop != null) {
-                NavigationService.Navigate(new Uri("/ResultPage.xaml?from=" + fromStop.StopIndex + "&to=" + toStop.StopIndex, UriKind.Relative));
+                NavigationService.Navigate(new Uri("/ResultPage.xaml?from=" + fromStop.StopIndex + "&to=" + toStop.StopIndex + 
+                    "&date="+ datePicker.ValueString + "&time="+timePicker.ValueString, UriKind.Relative));
             }
             else
             {

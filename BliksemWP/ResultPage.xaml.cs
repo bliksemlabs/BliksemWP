@@ -11,6 +11,7 @@ using Microsoft.Phone.Shell;
 using BliksemWP.Helpers;
 using BliksemWP.DataObjects;
 using Microsoft.Phone.Tasks;
+using System.Globalization;
 
 namespace BliksemWP
 {
@@ -18,6 +19,7 @@ namespace BliksemWP
     {
         private int fromStopId;
         private int toStopId;
+        private DateTime requestTime = new DateTime();
 
         public ResultPage()
         {
@@ -27,8 +29,8 @@ namespace BliksemWP
 
         void ResultPage_Loaded(object sender, RoutedEventArgs e)
         {
+            String fromString, toString, dateString, timeString;
             progressBar.Visibility = Visibility.Visible;
-            String fromString, toString;
             if (NavigationContext.QueryString.TryGetValue("from", out fromString))
             {
                 fromStopId = Convert.ToInt32(fromString);
@@ -37,9 +39,14 @@ namespace BliksemWP
             {
                 toStopId = Convert.ToInt32(toString);
             } 
+            if (NavigationContext.QueryString.TryGetValue("date", out dateString) && NavigationContext.QueryString.TryGetValue("time", out timeString))
+            {
+                requestTime = DateTime.Parse(dateString + " " + timeString);
+            }
             
             var router = new NcxPppp.LibRrrr();
-            var reisadvies = router.route(App.DATA_FILE_PATH, fromStopId, toStopId);
+            double seconds = (requestTime - new DateTime(1970, 1, 1).ToLocalTime()).TotalSeconds;
+            var reisadvies = router.route(App.DATA_FILE_PATH, fromStopId, toStopId, seconds, 0);
             if (reisadvies.Length > 1) {
                 ResultConverter c = new ResultConverter(reisadvies);
                 PivotHolder.ItemsSource = c.Journeys; // Databinding does the rest
