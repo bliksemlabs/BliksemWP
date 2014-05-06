@@ -11,29 +11,39 @@ namespace BliksemWP.DataObjects
     {
         public JourneyLegType LegType { get; set; }
 
-        public String Agency { get; set; }        
+        public string Agency { get; set; }
 
         public string Departure { get; set; }
         public DateTime DepartureTime { get; set; }
         public string Arrival { get; set; }
         public DateTime ArrivalTime { get; set; }
 
-        public String Headsign { get; set; }
-        public String ProductCategory { get; set; }
-        public String ProductName { get; set; }
+        public string Headsign { get; set; }
+        public string ProductCategory { get; set; }
+        public string ProductName { get; set; }
 
-        public String ProductDescription
+        public string ProductDescription
         {
             get
             {
-                if (LegType == JourneyLegType.WALK) {
+                if (LegType == JourneyLegType.WALK)
+                {
                     return "Loop";
-                } else if(LegType == JourneyLegType.WAIT) {
+                }
+                else if (LegType == JourneyLegType.WAIT)
+                {
                     return "Overstap";
-                } else {
+                }
+                else
+                {
                     return Agency + " " + ProductName + " naar " + Headsign;
                 }
             }
+        }
+
+        public string Image
+        {
+            get { return LegType.ToString(); }
         }
 
     }

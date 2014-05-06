@@ -151,10 +151,10 @@
     <None Include="Properties\WMAppManifest.xml">
       <SubType>Designer</SubType>
     </None>
-    <Content Include="Images\appbar.man.walk.png" />
+    <Content Include="Images\LegTypes\walk.png" />
     <Content Include="Images\appbar.question.png" />
-    <Content Include="Images\appbar.train.png" />
-    <Content Include="Images\appbar.transit.bus.png" />
+    <Content Include="Images\LegTypes\rail.png" />
+    <Content Include="Images\LegTypes\bus.png" />
     <Content Include="stops.db">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
