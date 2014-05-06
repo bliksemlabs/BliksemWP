@@ -23,7 +23,7 @@ char *btimetext(rtime_t rt, char *buf) {
 	char *day;
 	uint32_t t, m, s, h;
 	if (rt == UNREACHED) {
-        strcpy_s(buf, 10, "   --   ");
+        strcpy_s(buf, 8, "   --   ");
         return buf;
     }
     if (rt >= RTIME_THREE_DAYS) {
@@ -43,7 +43,7 @@ char *btimetext(rtime_t rt, char *buf) {
     m = t / 60;
     h = m / 60;
     m = m % 60;
-    _snprintf_s(buf, 16, 16, "%02d:%02d:%02d%s", h, m, s, day);
+    sprintf_s(buf, sizeof(buf), "%02d:%02d:%02d%s", h, m, s, day);
     return buf;
 }
 
