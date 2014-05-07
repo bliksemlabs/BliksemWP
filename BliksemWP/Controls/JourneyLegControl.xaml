@@ -3,14 +3,20 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:converters="clr-namespace:BliksemWP.Converters"
     mc:Ignorable="d"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     d:DesignHeight="480" d:DesignWidth="480">
+
+    <UserControl.Resources>
+        <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+    </UserControl.Resources>
     
     <Grid x:Name="LayoutRoot" Background="{StaticResource PhoneChromeBrush}">
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
@@ -21,32 +27,46 @@
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
-        <Image Grid.Column="1" Grid.Row="0" HorizontalAlignment="Center"
+        <Image Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" HorizontalAlignment="Center"
                Height="60" Width="60" VerticalAlignment="Top"
                Source="{Binding Image, StringFormat='/Images/LegTypes/{0}.png'}" />
         <TextBlock Grid.Row="0" Grid.Column="2" 
-                           Name="TransportName" VerticalAlignment="Top"
-                           Text="{Binding ProductDescription, FallbackValue=Productbeschrijving}"   
+                           Name="ProductDescription" VerticalAlignment="Top"
+                           Text="{Binding ProductDescription, FallbackValue=ProductDescription}"   
                            HorizontalAlignment="Left" FontFamily="Segoe WP Light" FontSize="25" />
+        <TextBlock Grid.Row="0" Grid.Column="2" 
+            Name="Agency" VerticalAlignment="Center" Margin="0 0 5 0"
+            Text="{Binding Agency, FallbackValue=Agency}"   
+            HorizontalAlignment="Right" FontFamily="Segoe WP Light" FontSize="18" />
+
+        <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="2" 
+                    Visibility="{Binding DirectionVisible, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=False}">
+            <TextBlock Margin="0 0 5 0" FontFamily="Segoe WP Light" FontSize="18"
+                Text="{Binding Path=LocalizedResources.JourneyLegControl_Direction, Source={StaticResource LocalizedStrings}}"/>
+            <TextBlock  
+                Name="Headsign" VerticalAlignment="Top"
+                Text="{Binding Headsign, FallbackValue=Headsign}"   
+                HorizontalAlignment="Left" FontFamily="Segoe WP Light" FontSize="18" />
+        </StackPanel>
        
-        <TextBlock Grid.Row="1" Grid.Column="1"
-                           HorizontalAlignment="Left" Name="DepartureTime"
-                           Text="{Binding DepartureTime, StringFormat='t', FallbackValue=00:00}"
-                           FontFamily="Segoe WP Semibold"/>
-        <TextBlock Grid.Row="1" Grid.Column="2" 
-                           Text="{Binding Departure, FallbackValue=Vertrekhalte}"
-                           Name="DepartureStop"
-                           HorizontalAlignment="Left" FontFamily="Segoe WP Semibold" />
-      
         <TextBlock Grid.Row="2" Grid.Column="1"
-                           HorizontalAlignment="Left" Name="ArrivalTime"
-                           Text="{Binding ArrivalTime, StringFormat='t', FallbackValue=00:00}" 
-                           FontFamily="Segoe WP Semibold"/>
+            HorizontalAlignment="Left" Name="DepartureTime"
+            Text="{Binding DepartureTime, StringFormat='t', FallbackValue=00:00}"
+            FontFamily="Segoe WP Semibold"/>
         <TextBlock Grid.Row="2" Grid.Column="2" 
-                           Text="{Binding Arrival, FallbackValue=Aankomsthalte}"
-                           Name="ArrivalStop"
-                           HorizontalAlignment="Left" 
-                           FontFamily="Segoe WP Semibold" />
+            Text="{Binding Departure, FallbackValue=Vertrekhalte}"
+            Name="DepartureStop"
+            HorizontalAlignment="Left" FontFamily="Segoe WP Semibold" />
+
+        <TextBlock Grid.Row="3" Grid.Column="1"
+            HorizontalAlignment="Left" Name="ArrivalTime"
+            Text="{Binding ArrivalTime, StringFormat='t', FallbackValue=00:00}" 
+            FontFamily="Segoe WP Semibold"/>
+        <TextBlock Grid.Row="3" Grid.Column="2" 
+            Text="{Binding Arrival, FallbackValue=Aankomsthalte}"
+            Name="ArrivalStop"
+            HorizontalAlignment="Left" 
+            FontFamily="Segoe WP Semibold" />
         <!--<Path Data="M25.5,50.5" Grid.Column="0"  Fill="{StaticResource PhoneContrastBackgroundBrush}" HorizontalAlignment="Left" Height="Auto" Margin="25.5,0.5,0,0" Grid.Row="1" Stretch="Fill" Stroke="{StaticResource PhoneAccentBrush}" UseLayoutRounding="False" VerticalAlignment="Top" Width="20" StrokeThickness="10"/>-->
     </Grid>
 </UserControl>

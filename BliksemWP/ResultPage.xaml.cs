@@ -35,8 +35,8 @@ namespace BliksemWP
             //TODO: remove test code after designing is finished
             //if (!NavigationContext.QueryString.Any())
             //{
-            //    fromStopId = 5868;
-            //    toStopId = 6978;
+            //    fromStopId = 40094;
+            //    toStopId = 34295;
             //    requestTime = new DateTime(2014, 05, 06, 10, 00, 00);
             //}
             //else
@@ -66,6 +66,7 @@ namespace BliksemWP
             else
             {
                 MessageBox.Show("Fout tijdens berekenen reisadvies. Probeer andere parameters");
+                NavigationService.GoBack();
             }
 
             progressBar.Visibility = Visibility.Collapsed;

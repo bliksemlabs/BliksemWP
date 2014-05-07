@@ -126,6 +126,9 @@
   <data name="General_AppTitle" xml:space="preserve">
     <value>BLIKSEM</value>
   </data>
+  <data name="General_JourneyLegType_Bus" xml:space="preserve">
+    <value>Bus</value>
+  </data>
   <data name="General_ResourceFlowDirection" xml:space="preserve">
     <value>LeftToRight</value>
     <comment>Controls the FlowDirection for all elements in the RootFrame. Set to the traditional direction of this resource file's language</comment>
@@ -133,6 +136,15 @@
   <data name="General_ResourceLanguage" xml:space="preserve">
     <value>en-US</value>
     <comment>Controls the Language and ensures that the font for all elements in the RootFrame aligns with the app's language. Set to the language code of this resource file's language.</comment>
+  </data>
+  <data name="JourneyLegControl_Change" xml:space="preserve">
+    <value>Overstap</value>
+  </data>
+  <data name="JourneyLegControl_Direction" xml:space="preserve">
+    <value>Richting:</value>
+  </data>
+  <data name="JourneyLegControl_Walk" xml:space="preserve">
+    <value>Loop</value>
   </data>
   <data name="MainPage_Calculate" xml:space="preserve">
     <value>Plan!</value>
