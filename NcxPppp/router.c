@@ -816,7 +816,7 @@ void router_result_to_plan (struct plan *plan, router_t *router, router_request_
         l = itin->legs; // the slot in which record a leg, reversing them for forward trips
         if ( ! req->arrive_by) l += itin->n_legs - 1;
         /* Follow the chain of states backward */
-        for (round = n_xfers; round >= 0; --round) {
+		for (round = n_xfers; round >= 0 && round <= n_xfers; --round) {
 			uint32_t walk_stop, ride_stop;
 			router_state_t *walk, *ride;
             if (stop > router->tdata->n_stops) {
@@ -895,7 +895,7 @@ void router_result_to_plan (struct plan *plan, router_t *router, router_request_
 
 static char *plan_render_itinerary (struct itinerary *itin, tdata_t *tdata, char *b, char *b_end) {
     struct leg *leg;
-    b += sprintf_s (b, sizeof(b), "\nITIN %d rides \n", itin->n_rides);
+    b += sprintf_s (b, 19, "===\nITIN %d rides \n", itin->n_rides);
 
     /* Render the legs of this itinerary, which are in chronological order */
     for (leg = itin->legs; leg < itin->legs + itin->n_legs; ++leg) {
@@ -960,8 +960,8 @@ static char *plan_render_itinerary (struct itinerary *itin, tdata_t *tdata, char
         }
 #endif
 
-		b += sprintf_s(b, sizeof(b), "%s;%5d;%3d;%5d;%5d;%s;%s;%+3.1f;%s;%s;%s;%s;%s;%s;%s\n",
-            leg_mode, leg->route, leg->trip, leg->s0, leg->s1, ct0, ct1, 0, agency_name, short_name, headsign, productcategory, s0_id, s1_id,
+		b += sprintf_s(b, 255, "%s;%5d;%3d;%5d;%5d;%s;%s;+0;%s;%s;%s;%s;%s;%s;%s\n",
+            leg_mode, leg->route, leg->trip, leg->s0, leg->s1, ct0, ct1, agency_name, short_name, headsign, productcategory, s0_id, s1_id,
             (alert_msg ? alert_msg : ""));
 
         /* EXAMPLE

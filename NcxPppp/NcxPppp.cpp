@@ -42,7 +42,8 @@ namespace NcxPppp
 			size = MultiByteToWideChar(CP_ACP, 0, result_buf, -1, message, size);
 			delete[] message;
 		}
-		return ToPlatformString(result_buf, OUTPUT_LEN);
+		Platform::String^ output = ToPlatformString(result_buf, OUTPUT_LEN);
+		return output;
 	}
 
 	std::unique_ptr<char> LibRrrr::PlatformStringToCharArray(String^ string) {
