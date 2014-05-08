@@ -129,6 +129,12 @@
   <data name="General_JourneyLegType_Bus" xml:space="preserve">
     <value>Bus</value>
   </data>
+  <data name="General_JourneyLegType_Subway" xml:space="preserve">
+    <value>Metro</value>
+  </data>
+  <data name="General_JourneyLegType_Tram" xml:space="preserve">
+    <value>Tram</value>
+  </data>
   <data name="General_ResourceFlowDirection" xml:space="preserve">
     <value>LeftToRight</value>
     <comment>Controls the FlowDirection for all elements in the RootFrame. Set to the traditional direction of this resource file's language</comment>

@@ -33,6 +33,14 @@ namespace BliksemWP.DataObjects
                 {
                     return string.Format("{0} {1}", AppResources.General_JourneyLegType_Bus, ProductName);
                 }
+                if (LegType == JourneyLegType.SUBWAY)
+                {
+                    return string.Format("{0} {1}", AppResources.General_JourneyLegType_Subway, ProductName);
+                }
+                if (LegType == JourneyLegType.TRAM)
+                {
+                    return string.Format("{0} {1}", AppResources.General_JourneyLegType_Subway, ProductName);
+                }
                 return ProductName;
             }
         }

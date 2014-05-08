@@ -56,12 +56,10 @@ namespace BliksemWP.Helpers
             var columns = line.Split(new[] { ";" }, StringSplitOptions.None);
             journeyLeg.LegType = (JourneyLegType)Enum.Parse(typeof(JourneyLegType), columns[0]);
 
-            String format = "HH:mm:ss";
             try
             {
-                journeyLeg.DepartureTime = DateTime.ParseExact(columns[5], format, CultureInfo.InvariantCulture);
-                // TODO - fix this round midnight - times are plus one day
-                journeyLeg.ArrivalTime = DateTime.ParseExact(columns[6], format, CultureInfo.InvariantCulture);
+                journeyLeg.DepartureTime = parseDateFromString(columns[5]);
+                journeyLeg.ArrivalTime = parseDateFromString(columns[6]);
             }
             catch (FormatException f)
             {
@@ -77,6 +75,15 @@ namespace BliksemWP.Helpers
             journeyLeg.ProductCategory = columns[11];
 
             return journeyLeg;
+        }
+
+        private static DateTime parseDateFromString(String text)
+        {
+            DateTime parsed = DateTime.ParseExact(text.Replace(" +1D", ""), "HH:mm:ss", CultureInfo.InvariantCulture);
+            if (text.Contains(" +1D")) {
+                parsed.AddDays(1);
+            }
+            return parsed;
         }
     }
 }
