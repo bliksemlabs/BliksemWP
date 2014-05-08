@@ -88,6 +88,15 @@ namespace BliksemWP.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Bus.
+        /// </summary>
+        public static string General_JourneyLegType_Bus {
+            get {
+                return ResourceManager.GetString("General_JourneyLegType_Bus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to LeftToRight.
         /// </summary>
         public static string General_ResourceFlowDirection {
@@ -102,6 +111,33 @@ namespace BliksemWP.Resources {
         public static string General_ResourceLanguage {
             get {
                 return ResourceManager.GetString("General_ResourceLanguage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Overstap.
+        /// </summary>
+        public static string JourneyLegControl_Change {
+            get {
+                return ResourceManager.GetString("JourneyLegControl_Change", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Richting:.
+        /// </summary>
+        public static string JourneyLegControl_Direction {
+            get {
+                return ResourceManager.GetString("JourneyLegControl_Direction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Loop.
+        /// </summary>
+        public static string JourneyLegControl_Walk {
+            get {
+                return ResourceManager.GetString("JourneyLegControl_Walk", resourceCulture);
             }
         }
         

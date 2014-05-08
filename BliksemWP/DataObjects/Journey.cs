@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BliksemWP.DataObjects
 {
-    class Journey
+    public class Journey
     {
         public List<Leg> Legs { get; set; }
 
@@ -20,8 +20,9 @@ namespace BliksemWP.DataObjects
 
         public override string ToString()
         {
-            TimeSpan duration = Legs[0].DepartureTime - Legs[Legs.Count - 1].ArrivalTime;
-            return duration.ToString(@"hh\:mm")+" "+ Transfers + "x" ;
+            //TimeSpan duration = Legs[0].DepartureTime - Legs[Legs.Count - 1].ArrivalTime;
+            //return duration.ToString(@"hh\:mm")+" "+ Transfers + "x" ;
+            return string.Format("{0:t} {1}x", Legs[0].DepartureTime, Transfers);
         }
     }
 }

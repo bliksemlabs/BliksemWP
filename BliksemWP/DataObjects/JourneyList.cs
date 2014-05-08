@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BliksemWP.DataObjects
 {
-    class JourneyList : ObservableCollection<Journey>
+    public class JourneyList : ObservableCollection<Journey>
     {
         public JourneyList() : base()
         {
