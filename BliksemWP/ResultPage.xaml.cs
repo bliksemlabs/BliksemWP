@@ -56,7 +56,7 @@ namespace BliksemWP
             //}
 
             var router = new NcxPppp.LibRrrr();
-            UInt32 seconds = Convert.ToUInt32((requestTime - new DateTime(1970, 1, 1).ToLocalTime()).TotalSeconds);
+            long seconds = Convert.ToUInt32((requestTime - new DateTime(1970, 1, 1).ToLocalTime()).TotalSeconds);
             var reisadvies = router.route(App.DATA_FILE_PATH, fromStopId, toStopId, seconds, 0);
             if (reisadvies.Length > 1)
             {

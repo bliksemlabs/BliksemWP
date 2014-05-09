@@ -357,6 +357,8 @@ void tdata_load(char *filename, tdata_t *td) {
 
     /* Check if this works properly in Visual Studio */
 
+	td->calendar_start_time = header->calendar_start_time;
+	td->dst_active = header->dst_active;
     load_mmap (b, stops, stop_t);
     load_mmap (b, stop_attributes, uint8_t);
     load_mmap (b, stop_coords, latlon_t);

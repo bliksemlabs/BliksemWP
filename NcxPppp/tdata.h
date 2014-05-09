@@ -264,9 +264,13 @@ void tdata_close_dynamic(tdata_t *td);
     td->n_##storage = header->n_##storage; \
     td->storage = (type *) (b + header->loc_##storage)
 
+#define load_mmap_value(b, storage, type) \
+    td->storage = (type *) (b + header->##storage)
+
 #define load_mmap_string(b, storage) \
     td->n_##storage = header->n_##storage; \
     td->storage##_width = *((uint32_t *) (b + header->loc_##storage)); \
     td->storage = (char*) (b + header->loc_##storage + sizeof(uint32_t))
+
 
 #endif // _TDATA_H

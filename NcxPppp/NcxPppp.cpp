@@ -17,7 +17,7 @@ namespace NcxPppp
 
 	}
 	
-	Platform::String^ LibRrrr::route(Platform::String^ path, int from, int to, uint32 time, uint8 arriveBy) {
+	Platform::String^ LibRrrr::route(Platform::String^ path, int from, int to, time_t time, uint8 arriveBy) {
 		tdata_t tdata;
 		auto pathConverted = PlatformStringToCharArray(path);
 		tdata_load(pathConverted.get(), &tdata);

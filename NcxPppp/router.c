@@ -1054,17 +1054,18 @@ void router_request_from_epoch(router_request_t *req, tdata_t *tdata, time_t epo
     // printf ("epoch time: %s [%ld]\n", etime, epochtime);
     // router_request_initialize (req);
     struct tm origin_tm;
-    uint32_t cal_day = (mktime(&origin_tm) - tdata->calendar_start_time) / SEC_IN_ONE_DAY;
+	uint32_t cal_day;
     req->time = epoch_to_rtime (epochtime, &origin_tm);
     req->time_rounded = (origin_tm.tm_sec % 4);
     // TODO not DST-proof, use noons
+	cal_day = (mktime(&origin_tm) - tdata->calendar_start_time) / SEC_IN_ONE_DAY;
     if (cal_day > 31 ) {
         /* date not within validity period of the timetable file, wrap to validity range */
         cal_day %= 28; // a multiple of 7, so we always wrap to the same day of the week
         printf ("calendar day out of range. wrapping to %d, which is on the same day of the week.\n", cal_day);
         /* should set a flag in response to say that results are estimated */
     }
-    req->day_mask = 1 << cal_day;
+	req->day_mask = 1 << cal_day;
 }
 
 void router_request_randomize (router_request_t *req, tdata_t *tdata) {
