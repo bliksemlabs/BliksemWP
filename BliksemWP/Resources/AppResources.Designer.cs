@@ -70,7 +70,7 @@ namespace BliksemWP.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Data wordt geüpdatet.
+        ///   Looks up a localized string similar to Data is being updated.
         /// </summary>
         public static string DownloadUpdatePage_UpdateInProgress {
             get {
@@ -97,7 +97,7 @@ namespace BliksemWP.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Metro.
+        ///   Looks up a localized string similar to Subway.
         /// </summary>
         public static string General_JourneyLegType_Subway {
             get {
@@ -133,7 +133,7 @@ namespace BliksemWP.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Overstap.
+        ///   Looks up a localized string similar to Transfer.
         /// </summary>
         public static string JourneyLegControl_Change {
             get {
@@ -142,7 +142,7 @@ namespace BliksemWP.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Richting:.
+        ///   Looks up a localized string similar to Heading.
         /// </summary>
         public static string JourneyLegControl_Direction {
             get {
@@ -151,7 +151,7 @@ namespace BliksemWP.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Loop.
+        ///   Looks up a localized string similar to Walk.
         /// </summary>
         public static string JourneyLegControl_Walk {
             get {
@@ -169,7 +169,7 @@ namespace BliksemWP.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Datum.
+        ///   Looks up a localized string similar to Date.
         /// </summary>
         public static string MainPage_Date {
             get {
@@ -178,7 +178,7 @@ namespace BliksemWP.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Kies eerst een vertrek- en eindpunt.
+        ///   Looks up a localized string similar to Please choose a departure and destination point.
         /// </summary>
         public static string MainPage_Error_ChooseStops {
             get {
@@ -187,7 +187,7 @@ namespace BliksemWP.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Van.
+        ///   Looks up a localized string similar to From.
         /// </summary>
         public static string MainPage_From {
             get {
@@ -196,7 +196,7 @@ namespace BliksemWP.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Aankomst.
+        ///   Looks up a localized string similar to Arrive by.
         /// </summary>
         public static string MainPage_GivenTimeIsArrival {
             get {
@@ -205,7 +205,7 @@ namespace BliksemWP.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Vertrek.
+        ///   Looks up a localized string similar to Depart at.
         /// </summary>
         public static string MainPage_GivenTimeIsDeparture {
             get {
@@ -214,7 +214,7 @@ namespace BliksemWP.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Tijd.
+        ///   Looks up a localized string similar to Time.
         /// </summary>
         public static string MainPage_Time {
             get {
@@ -223,7 +223,7 @@ namespace BliksemWP.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to reisplanner.
+        ///   Looks up a localized string similar to trip planner.
         /// </summary>
         public static string MainPage_Title {
             get {
@@ -232,7 +232,7 @@ namespace BliksemWP.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Naar.
+        ///   Looks up a localized string similar to To.
         /// </summary>
         public static string MainPage_To {
             get {
@@ -241,7 +241,7 @@ namespace BliksemWP.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Laad nieuwe data.
+        ///   Looks up a localized string similar to Update data.
         /// </summary>
         public static string MainPage_Update {
             get {
@@ -250,7 +250,7 @@ namespace BliksemWP.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Voeg toe aan agenda.
+        ///   Looks up a localized string similar to Add to calendar.
         /// </summary>
         public static string ResultPage_AddToCalendarButton {
             get {
@@ -259,7 +259,7 @@ namespace BliksemWP.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Deel.
+        ///   Looks up a localized string similar to Share.
         /// </summary>
         public static string ResultPage_ShareButton {
             get {
@@ -268,7 +268,7 @@ namespace BliksemWP.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to REISMOGELIJKHEDEN.
+        ///   Looks up a localized string similar to TRAVEL OPTIONS.
         /// </summary>
         public static string ResultPage_Title {
             get {

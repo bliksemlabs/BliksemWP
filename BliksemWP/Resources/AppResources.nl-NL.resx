@@ -117,12 +117,84 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="DownloadUpdatePage_Title" xml:space="preserve">
+    <value>update</value>
+  </data>
+  <data name="DownloadUpdatePage_UpdateInProgress" xml:space="preserve">
+    <value>Data wordt geüpdatet</value>
+  </data>
+  <data name="General_AppTitle" xml:space="preserve">
+    <value>BLIKSEM</value>
+  </data>
+  <data name="General_JourneyLegType_Bus" xml:space="preserve">
+    <value>Bus</value>
+  </data>
+  <data name="General_JourneyLegType_Subway" xml:space="preserve">
+    <value>Metro</value>
+  </data>
+  <data name="General_JourneyLegType_Tram" xml:space="preserve">
+    <value>Tram</value>
+  </data>
   <data name="General_ResourceFlowDirection" xml:space="preserve">
     <value>LeftToRight</value>
     <comment>Controls the FlowDirection for all elements in the RootFrame. Set to the traditional direction of this resource file's language</comment>
   </data>
+  <data name="General_ResourceFlowDirection1" xml:space="preserve">
+    <value>LeftToRight</value>
+  </data>
   <data name="General_ResourceLanguage" xml:space="preserve">
     <value>nl-NL</value>
     <comment>Controls the Language and ensures that the font for all elements in the RootFrame aligns with the app's language. Set to the language code of this resource file's language.</comment>
+  </data>
+  <data name="General_ResourceLanguage1" xml:space="preserve">
+    <value>en-US</value>
+  </data>
+  <data name="JourneyLegControl_Change" xml:space="preserve">
+    <value>Overstap</value>
+  </data>
+  <data name="JourneyLegControl_Direction" xml:space="preserve">
+    <value>Richting</value>
+  </data>
+  <data name="JourneyLegControl_Walk" xml:space="preserve">
+    <value>Loop</value>
+  </data>
+  <data name="MainPage_Calculate" xml:space="preserve">
+    <value>Plan!</value>
+  </data>
+  <data name="MainPage_Date" xml:space="preserve">
+    <value>Datum</value>
+  </data>
+  <data name="MainPage_Error_ChooseStops" xml:space="preserve">
+    <value>Kies eerst een vertrek- en eindpunt</value>
+  </data>
+  <data name="MainPage_From" xml:space="preserve">
+    <value>Van</value>
+  </data>
+  <data name="MainPage_GivenTimeIsArrival" xml:space="preserve">
+    <value>Aankomst</value>
+  </data>
+  <data name="MainPage_GivenTimeIsDeparture" xml:space="preserve">
+    <value>Vertrek</value>
+  </data>
+  <data name="MainPage_Time" xml:space="preserve">
+    <value>Tijd</value>
+  </data>
+  <data name="MainPage_Title" xml:space="preserve">
+    <value>reisplanner</value>
+  </data>
+  <data name="MainPage_To" xml:space="preserve">
+    <value>Naar</value>
+  </data>
+  <data name="MainPage_Update" xml:space="preserve">
+    <value>Laad nieuwe data</value>
+  </data>
+  <data name="ResultPage_AddToCalendarButton" xml:space="preserve">
+    <value>Voeg toe aan agenda</value>
+  </data>
+  <data name="ResultPage_ShareButton" xml:space="preserve">
+    <value>Deel</value>
+  </data>
+  <data name="ResultPage_Title" xml:space="preserve">
+    <value>REISMOGELIJKHEDEN</value>
   </data>
 </root>
