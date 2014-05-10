@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="DownloadUpdatePage_Title" xml:space="preserve">
-    <value>update</value>
+    <value>region</value>
   </data>
   <data name="DownloadUpdatePage_UpdateInProgress" xml:space="preserve">
     <value>Data is being updated</value>

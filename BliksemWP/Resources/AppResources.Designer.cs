@@ -61,7 +61,16 @@ namespace BliksemWP.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to update.
+        ///   Looks up a localized string similar to Last updated.
+        /// </summary>
+        public static string DownloadUpdatePage_LastUpdate {
+            get {
+                return ResourceManager.GetString("DownloadUpdatePage_LastUpdate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to region.
         /// </summary>
         public static string DownloadUpdatePage_Title {
             get {
@@ -210,6 +219,15 @@ namespace BliksemWP.Resources {
         public static string MainPage_GivenTimeIsDeparture {
             get {
                 return ResourceManager.GetString("MainPage_GivenTimeIsDeparture", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Region.
+        /// </summary>
+        public static string MainPage_Region {
+            get {
+                return ResourceManager.GetString("MainPage_Region", resourceCulture);
             }
         }
         

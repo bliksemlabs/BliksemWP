@@ -56,7 +56,7 @@
     <NoStdLib>true</NoStdLib>
     <NoConfig>true</NoConfig>
     <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
+    <WarningLevel>0</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <DebugType>pdbonly</DebugType>
@@ -98,6 +98,7 @@
     </Compile>
     <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
     <Compile Include="Converters\DateTimeToTimeStringConverter.cs" />
+    <Compile Include="DataObjects\Validity.cs" />
     <Compile Include="DataObjects\Journey.cs" />
     <Compile Include="DataObjects\DataRegion.cs" />
     <Compile Include="DataObjects\JourneyList.cs" />

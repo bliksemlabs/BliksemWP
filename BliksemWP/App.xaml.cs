@@ -17,12 +17,21 @@ namespace BliksemWP
     public partial class App : Application
     {
         /// <summary>
-        /// The database path.
+        /// The filename for database and stop databases. These are region specific.
         /// </summary>
         public static string STOPS_DB_NAME = "stops.db";
-        public static string STOPS_DB_PATH = Path.Combine(Path.Combine(ApplicationData.Current.LocalFolder.Path, STOPS_DB_NAME));
         public static string DATA_FILE_NAME = "timetable.dat";
-        public static string DATA_FILE_PATH = Path.Combine(ApplicationData.Current.LocalFolder.Path, DATA_FILE_NAME);
+
+        public static string INDEX_FILE_NAME = "index.xml";
+        public static string INDEX_FILE_PATH = Path.Combine(ApplicationData.Current.LocalFolder.Path, INDEX_FILE_NAME);
+
+        public static string KEY_REGION = "currentRegion";
+        public static string KEY_REGION_LONG = "currentRegionLong";
+
+        public static string BUNDLED_REGION_SHORT = "nl";
+        public static string BUNDLED_REGION_LONG = "The Netherlands";
+        public static DateTime BUNDLED_REGION_VALIDITY_START = new DateTime(2014, 05, 10);
+
 
         /// <summary>
         /// Provides easy access to the root frame of the Phone Application.
@@ -53,11 +62,10 @@ namespace BliksemWP
         // This code will not execute when the application is reactivated
         private async void Application_Launching(object sender, LaunchingEventArgs e)
         {
-            IsolatedStorageFile storage = IsolatedStorageFile.GetUserStoreForApplication();
-            Boolean copiedStops = !storage.FileExists(App.STOPS_DB_PATH);
-            
-            await copyResourceFile(App.STOPS_DB_PATH, STOPS_DB_NAME);
-            await copyResourceFile(App.DATA_FILE_PATH, DATA_FILE_NAME);
+            Boolean copiedStops = !IsolatedStorageFile.GetUserStoreForApplication().FileExists(GetCurrentDataFilePath(STOPS_DB_NAME));
+
+            await copyResourceFile(GetCurrentDataFilePath(null), STOPS_DB_NAME);
+            await copyResourceFile(GetCurrentDataFilePath(null), DATA_FILE_NAME);
 
             // Only do this if we (re)loaded the database 
             if (copiedStops)
@@ -65,7 +73,42 @@ namespace BliksemWP
                 PrepareFTSDatabase();
             }
 
+        }
 
+        public static string GetCurrentDataFilePath(string filename)
+        {
+            return GetCurrentDataFilePath(filename, false);
+        }
+
+        public static string GetCurrentDataFilePath(string filename, Boolean relative) {
+            if (filename == null)
+            {
+                filename = "";
+            }
+            string[] pieces;
+            if (relative)
+            {
+                pieces = new string[] {  GetRegion(), filename};
+            }
+            else
+            {
+                pieces = new string[] { ApplicationData.Current.LocalFolder.Path, GetRegion(), filename };
+            }
+            return Path.Combine(pieces);
+
+        }
+
+
+        public static string GetRegion()
+        {
+            IsolatedStorageSettings settings = IsolatedStorageSettings.ApplicationSettings;
+            if (!settings.Contains(KEY_REGION))
+            {
+                settings.Add(KEY_REGION, App.BUNDLED_REGION_SHORT);
+                settings.Add(KEY_REGION_LONG, App.BUNDLED_REGION_LONG);
+                settings.Save();
+            }
+            return (string)settings[KEY_REGION];
         }
 
         private static async System.Threading.Tasks.Task copyResourceFile(String pathName, String fileName)
@@ -74,7 +117,7 @@ namespace BliksemWP
             try
             {
                 // Try to get the 
-                dbFile = await StorageFile.GetFileFromPathAsync(pathName);
+                dbFile = await StorageFile.GetFileFromPathAsync(Path.Combine(pathName, fileName));
             }
             catch (FileNotFoundException)
             {
@@ -83,12 +126,13 @@ namespace BliksemWP
                     // Copy file from installation folder to local folder.
                     // Obtain the virtual store for the application.
                     IsolatedStorageFile iso = IsolatedStorageFile.GetUserStoreForApplication();
+                    iso.CreateDirectory(pathName);
 
                     // Create a stream for the file in the installation folder.
                     using (Stream input = Application.GetResourceStream(new Uri(fileName, UriKind.Relative)).Stream)
                     {
                         // Create a stream for the new file in the local folder.
-                        using (IsolatedStorageFileStream output = iso.CreateFile(pathName))
+                        using (IsolatedStorageFileStream output = iso.CreateFile(Path.Combine(pathName, fileName)))
                         {
                             // Initialize the buffer.
                             byte[] readBuffer = new byte[4096];
@@ -109,7 +153,7 @@ namespace BliksemWP
         async void PrepareFTSDatabase()
         {
             // Get the file from the install location  
-            var file = await ApplicationData.Current.LocalFolder.GetFileAsync(STOPS_DB_NAME);
+            var file = await ApplicationData.Current.LocalFolder.GetFileAsync(GetCurrentDataFilePath(STOPS_DB_NAME));
 
             // Create a new SQLite instance for the file 
             var db = new Database(file);

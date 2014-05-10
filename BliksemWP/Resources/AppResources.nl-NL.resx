@@ -117,8 +117,11 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="DownloadUpdatePage_LastUpdate" xml:space="preserve">
+    <value>Laatst ververst</value>
+  </data>
   <data name="DownloadUpdatePage_Title" xml:space="preserve">
-    <value>update</value>
+    <value>regio</value>
   </data>
   <data name="DownloadUpdatePage_UpdateInProgress" xml:space="preserve">
     <value>Data wordt geüpdatet</value>
@@ -175,6 +178,9 @@
   </data>
   <data name="MainPage_GivenTimeIsDeparture" xml:space="preserve">
     <value>Vertrek</value>
+  </data>
+  <data name="MainPage_Region" xml:space="preserve">
+    <value>Regio</value>
   </data>
   <data name="MainPage_Time" xml:space="preserve">
     <value>Tijd</value>

@@ -14,6 +14,7 @@ using Windows.Storage;
 using SQLiteWinRT;
 using System.Collections;
 using System.Diagnostics;
+using BliksemWP.DataObjects;
 
 namespace BliksemWP
 {
@@ -27,6 +28,19 @@ namespace BliksemWP
             InitializeComponent();
             LayoutRoot.VerticalScrollBarVisibility = ScrollBarVisibility.Disabled;
             SetupDB();
+
+            Loaded += MainPage_Loaded;
+
+            Unloaded += (s, e) => 
+            {
+                this.db.Dispose();
+            };
+        }
+
+        private void MainPage_Loaded(object sender, RoutedEventArgs e)
+        {
+            // Set the current region
+            labelRegion.Text = (string)IsolatedStorageSettings.ApplicationSettings[App.KEY_REGION_LONG];
         }
 
         private void TextBox_GotFocus(object sender, RoutedEventArgs e)
@@ -42,7 +56,7 @@ namespace BliksemWP
         async void SetupDB()
         {
             // Get the file from the install location  
-            StorageFile file = await ApplicationData.Current.LocalFolder.GetFileAsync("stops.db");
+            StorageFile file = await ApplicationData.Current.LocalFolder.GetFileAsync(App.GetCurrentDataFilePath(App.STOPS_DB_NAME, true));
 
             // Create a new SQLite instance for the file 
             this.db = new Database(file);
