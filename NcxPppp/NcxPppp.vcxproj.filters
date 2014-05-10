@@ -8,26 +8,20 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="bitset.c" />
-    <ClCompile Include="geometry.c" />
-    <ClCompile Include="polyline.c" />
-    <ClCompile Include="qstring.c" />
-    <ClCompile Include="radixtree.c" />
     <ClCompile Include="router.c" />
     <ClCompile Include="tdata.c" />
     <ClCompile Include="util.c" />
     <ClCompile Include="NcxPppp.cpp" />
+    <ClCompile Include="geometry.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="bitset.h" />
     <ClInclude Include="config.h" />
-    <ClInclude Include="geometry.h" />
-    <ClInclude Include="polyline.h" />
-    <ClInclude Include="qstring.h" />
-    <ClInclude Include="radixtree.h" />
     <ClInclude Include="router.h" />
     <ClInclude Include="stdbool.h" />
     <ClInclude Include="tdata.h" />
     <ClInclude Include="util.h" />
     <ClInclude Include="NcxPppp.h" />
+    <ClInclude Include="geometry.h" />
   </ItemGroup>
 </Project>

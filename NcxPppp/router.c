@@ -7,9 +7,6 @@
 #include "config.h"
 #include "tdata.h"
 #include "bitset.h"
-//#include "json.h"
-//#include "parse.h"
-#include "polyline.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>

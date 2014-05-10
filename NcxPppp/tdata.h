@@ -7,7 +7,6 @@
 
 #include "geometry.h"
 #include "util.h"
-#include "radixtree.h"
 
 #ifdef RRRR_REALTIME
 #include "gtfs-realtime.pb-c.h"
