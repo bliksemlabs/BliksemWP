@@ -3,6 +3,8 @@
   <DefaultLanguage xmlns="" code="en-US" />
   <Languages xmlns="">
     <Language code="nl-NL" />
+    <Language code="fr" />
+    <Language code="de" />
   </Languages>
   <App xmlns="" ProductID="{e7a1764b-feb2-4bf4-a912-18e7ab3d5b4b}" Title="BliksemWP" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal" Author="BliksemWP author" Description="Sample description" Publisher="BliksemWP" PublisherID="{b790081a-75c5-4d16-ae91-548afc5d7f8d}">
     <IconPath IsRelative="true" IsResource="false">Assets\ApplicationIcon.png</IconPath>
