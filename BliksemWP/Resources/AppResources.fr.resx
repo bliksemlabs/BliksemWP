@@ -143,6 +143,51 @@
     <value>fr</value>
     <comment>Controls the Language and ensures that the font for all elements in the RootFrame aligns with the app's language. Set to the language code of this resource file's language.</comment>
   </data>
+  <data name="InfoAndSettingsPage_Contact_ContactButton" xml:space="preserve">
+    <value>Contact</value>
+  </data>
+  <data name="InfoAndSettingsPage_Contact_Header" xml:space="preserve">
+    <value>Contact</value>
+  </data>
+  <data name="InfoAndSettingsPage_Contact_MailSubject" xml:space="preserve">
+    <value>Feedback Bliksem WP app</value>
+  </data>
+  <data name="InfoAndSettingsPage_Contact_ReviewButton" xml:space="preserve">
+    <value>Review</value>
+  </data>
+  <data name="InfoAndSettingsPage_Contact_Text" xml:space="preserve">
+    <value>If you have questions, comments or suggestions, we would like to receive this by e-mail. We also ask you to review this app. Thank you!</value>
+  </data>
+  <data name="InfoAndSettingsPage_Disclaimer_Header" xml:space="preserve">
+    <value>Disclaimer</value>
+  </data>
+  <data name="InfoAndSettingsPage_Disclaimer_Text" xml:space="preserve">
+    <value>We pay the utmost care and attention to this app and the data. Nevertheless, errors or omissions occur. We accept no liability for damage caused by these errors or omissions.</value>
+  </data>
+  <data name="InfoAndSettingsPage_Info_Copyright" xml:space="preserve">
+    <value>Copyright © 2014 Bliksem Labs</value>
+  </data>
+  <data name="InfoAndSettingsPage_Info_Header" xml:space="preserve">
+    <value>Info</value>
+  </data>
+  <data name="InfoAndSettingsPage_Info_Message" xml:space="preserve">
+    <value>Hier een leuk info tekstje</value>
+  </data>
+  <data name="InfoAndSettingsPage_Info_Version" xml:space="preserve">
+    <value>Version: {0}</value>
+  </data>
+  <data name="InfoAndSettingsPage_Privacy_Header" xml:space="preserve">
+    <value>Privacy</value>
+  </data>
+  <data name="InfoAndSettingsPage_Privacy_Text" xml:space="preserve">
+    <value>This application uses an internet connection to update the timetable</value>
+  </data>
+  <data name="InfoAndSettingsPage_Privacy_Title" xml:space="preserve">
+    <value>Privacy Statement</value>
+  </data>
+  <data name="InfoAndSettingsPage_Settings_Header" xml:space="preserve">
+    <value>Settings</value>
+  </data>
   <data name="JourneyLegControl_Change" xml:space="preserve">
     <value>Transfer</value>
   </data>

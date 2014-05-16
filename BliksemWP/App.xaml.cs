@@ -4,6 +4,7 @@ using System.Resources;
 using System.Windows;
 using System.Windows.Markup;
 using System.Windows.Navigation;
+using BliksemWP.Helpers;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using BliksemWP.Resources;
@@ -312,6 +313,9 @@ namespace BliksemWP
                 // the resource file.
                 FlowDirection flow = (FlowDirection)Enum.Parse(typeof(FlowDirection), AppResources.General_ResourceFlowDirection);
                 RootFrame.FlowDirection = flow;
+
+                //set language
+                CultureHelper.SetCulture((Enums.Language)new SettingsHelper().GetValueOrDefault(SettingsHelper.Language, (int)Enums.Language.English));
             }
             catch
             {

@@ -27,10 +27,11 @@ namespace BliksemWP
         {
             InitializeComponent();
             LayoutRoot.VerticalScrollBarVisibility = ScrollBarVisibility.Disabled;
-
             Loaded += MainPage_Loaded;
+            BuildApplicationBar();
 
-            Unloaded += (s, e) => 
+
+            Unloaded += (s, e) =>
             {
                 this.db.Dispose();
             };
@@ -68,17 +69,18 @@ namespace BliksemWP
 
         void btnStart_Click(object sender, RoutedEventArgs e)
         {
-            Stop fromStop = (Stop) from.SelectedItem;
-            Stop toStop = (Stop) to.SelectedItem;
-            if (fromStop != null && toStop != null) {
-                NavigationService.Navigate(new Uri("/ResultPage.xaml?from=" + fromStop.StopIndex + "&to=" + toStop.StopIndex + 
-                    "&date="+ datePicker.ValueString + "&time="+timePicker.ValueString, UriKind.Relative));
+            Stop fromStop = (Stop)from.SelectedItem;
+            Stop toStop = (Stop)to.SelectedItem;
+            if (fromStop != null && toStop != null)
+            {
+                NavigationService.Navigate(new Uri("/ResultPage.xaml?from=" + fromStop.StopIndex + "&to=" + toStop.StopIndex +
+                    "&date=" + datePicker.ValueString + "&time=" + timePicker.ValueString, UriKind.Relative));
             }
             else
             {
                 MessageBox.Show(AppResources.MainPage_Error_ChooseStops);
             }
-            
+
         }
 
         void btnUpdate_Click(object sender, RoutedEventArgs e)
@@ -104,11 +106,11 @@ namespace BliksemWP
             // Loop through all the results and add to the collection
             while (await statement.StepAsync())
             {
-                Stop stop = new Stop() { StopIndex = statement.GetIntAt(0), StopName = statement.GetTextAt(1)  };
+                Stop stop = new Stop() { StopIndex = statement.GetIntAt(0), StopName = statement.GetTextAt(1) };
                 items.Add(stop);
             }
 
-            Debug.WriteLine(formattedText + ": "+ items.Count);
+            Debug.WriteLine(formattedText + ": " + items.Count);
             (sender as AutoCompleteBox).ItemsSource = items;
             (sender as AutoCompleteBox).PopulateComplete();
         }
@@ -131,7 +133,19 @@ namespace BliksemWP
             e.Cancel = true;
         }
 
+        private void BuildApplicationBar()
+        {
+            ApplicationBar = new ApplicationBar();
+            ApplicationBar.Mode = ApplicationBarMode.Minimized;
 
-       
+            ApplicationBarMenuItem appBarMenuItemInfo = new ApplicationBarMenuItem(AppResources.MainPage_AppBar_Info);
+            ApplicationBar.MenuItems.Add(appBarMenuItemInfo);
+            appBarMenuItemInfo.Click += ApplicationBarMenuItemInfoSettings_Click;
+        }
+
+        private void ApplicationBarMenuItemInfoSettings_Click(object sender, EventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/InfoAndSettings.xaml", UriKind.Relative));
+        }
     }
 }

@@ -69,7 +69,7 @@
                     <toolkit:DatePicker x:Name="datePicker" Margin="0" Grid.Row="1" 
                                      HorizontalAlignment="Left" 
                                     Width="180" />
-                <toolkit:TimePicker x:Name="timePicker"  ValueStringFormat="{}{0:t}"
+                    <toolkit:TimePicker x:Name="timePicker"  ValueStringFormat="{}{0:t}"
                                     Grid.Row="1" Width="180" HorizontalAlignment="Right"
                                     Margin="0" VerticalAlignment="Center"/>
                     <RadioButton Grid.Row="2" IsChecked="True" GroupName="VA" Content="{Binding Path=LocalizedResources.MainPage_GivenTimeIsDeparture, Source={StaticResource LocalizedStrings}}"
@@ -84,5 +84,7 @@
             </StackPanel>
         </Grid>
     </ScrollViewer>
-
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar/>
+    </phone:PhoneApplicationPage.ApplicationBar>
 </phone:PhoneApplicationPage>

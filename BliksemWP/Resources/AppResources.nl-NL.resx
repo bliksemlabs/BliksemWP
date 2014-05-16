@@ -158,6 +158,51 @@
   <data name="General_ResourceLanguage1" xml:space="preserve">
     <value>en-US</value>
   </data>
+  <data name="InfoAndSettingsPage_Contact_ContactButton" xml:space="preserve">
+    <value>Contact</value>
+  </data>
+  <data name="InfoAndSettingsPage_Contact_Header" xml:space="preserve">
+    <value>Contact</value>
+  </data>
+  <data name="InfoAndSettingsPage_Contact_MailSubject" xml:space="preserve">
+    <value>Opmerkingen Bushalte app</value>
+  </data>
+  <data name="InfoAndSettingsPage_Contact_ReviewButton" xml:space="preserve">
+    <value>Review</value>
+  </data>
+  <data name="InfoAndSettingsPage_Contact_Text" xml:space="preserve">
+    <value>Mocht je vragen, opmerkingen of suggesties hebben, dan ontvangen wij deze graag per e-mail. Ook willen wij je vragen deze app een review te geven. Alvast bedankt!</value>
+  </data>
+  <data name="InfoAndSettingsPage_Disclaimer_Header" xml:space="preserve">
+    <value>Disclaimer</value>
+  </data>
+  <data name="InfoAndSettingsPage_Disclaimer_Text" xml:space="preserve">
+    <value>We besteden de grootst mogelijke zorg en aandacht aan deze app en de data die hierin zichtbaar is. Desondanks kunnen er onjuistheden of onvolkomenheden voorkomen. Wij aanvaarden geen aansprakelijkheid voor schade als gevolg van onjuistheden of onvolkomenheden.</value>
+  </data>
+  <data name="InfoAndSettingsPage_Info_Copyright" xml:space="preserve">
+    <value>Copyright © 2014 Bliksem Labs</value>
+  </data>
+  <data name="InfoAndSettingsPage_Info_Header" xml:space="preserve">
+    <value>Info</value>
+  </data>
+  <data name="InfoAndSettingsPage_Info_Message" xml:space="preserve">
+    <value>Hier een leuk info tekstje</value>
+  </data>
+  <data name="InfoAndSettingsPage_Info_Version" xml:space="preserve">
+    <value>Versie: {0}</value>
+  </data>
+  <data name="InfoAndSettingsPage_Privacy_Header" xml:space="preserve">
+    <value>Privacy</value>
+  </data>
+  <data name="InfoAndSettingsPage_Privacy_Text" xml:space="preserve">
+    <value>Deze applicatie gebruikt uw internetverbinding om de dienstregeling bij te werken</value>
+  </data>
+  <data name="InfoAndSettingsPage_Privacy_Title" xml:space="preserve">
+    <value>Privacy Statement</value>
+  </data>
+  <data name="InfoAndSettingsPage_Settings_Header" xml:space="preserve">
+    <value>Instellingen</value>
+  </data>
   <data name="JourneyLegControl_Change" xml:space="preserve">
     <value>Overstap</value>
   </data>

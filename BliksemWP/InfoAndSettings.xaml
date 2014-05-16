@@ -1,0 +1,87 @@
+﻿<phone:PhoneApplicationPage
+    x:Class="BliksemWP.InfoAndSettings"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d"
+    shell:SystemTray.IsVisible="True">
+
+    <Grid x:Name="LayoutRoot">
+        <phone:Panorama>
+            <phone:PanoramaItem Header="{Binding Path=LocalizedResources.InfoAndSettingsPage_Info_Header, Source={StaticResource LocalizedStrings}}">
+                <Grid x:Name="gInfo" Margin="12,0,12,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="350" />
+                        <RowDefinition Height="238" />
+                        <RowDefinition Height="90*" />
+                    </Grid.RowDefinitions>
+                    <TextBlock TextWrapping="Wrap" 
+                       Text="{Binding Path=LocalizedResources.InfoAndSettingsPage_Info_Message, Source={StaticResource LocalizedStrings}}" FontSize="21.333" Margin="0,0,0,143" Height="207" />
+
+                    <StackPanel HorizontalAlignment="Right" Grid.Row="2">
+                        <StackPanel>
+                            <TextBlock x:Name="txtVersion"/>
+                            <TextBlock Text="{Binding Path=LocalizedResources.InfoAndSettingsPage_Info_Copyright, Source={StaticResource LocalizedStrings}}"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Grid>
+            </phone:PanoramaItem>
+
+            <phone:PanoramaItem Header="{Binding Path=LocalizedResources.InfoAndSettingsPage_Privacy_Header, Source={StaticResource LocalizedStrings}}">
+                <StackPanel x:Name="gPrivacy" Margin="12,0,12,0">
+                    <TextBlock Text="{Binding Path=LocalizedResources.InfoAndSettingsPage_Privacy_Title, Source={StaticResource LocalizedStrings}}" FontSize="30" />
+                    <TextBlock TextWrapping="Wrap" 
+                       Text="{Binding Path=LocalizedResources.InfoAndSettingsPage_Privacy_Text, Source={StaticResource LocalizedStrings}}" 
+                               FontSize="21.333" />
+                </StackPanel>
+            </phone:PanoramaItem>
+
+            <phone:PanoramaItem Header="{Binding Path=LocalizedResources.InfoAndSettingsPage_Settings_Header, Source={StaticResource LocalizedStrings}}">
+                <StackPanel>
+                    <StackPanel.Resources>
+                        <DataTemplate x:Name="PickerItemTemplate">
+                            <StackPanel Orientation="Horizontal" >
+                                <TextBlock Text="{Binding Name}" Margin="0" FontSize="30" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </StackPanel.Resources>
+                    <toolkit:ListPicker x:Name="lpLanguages" ItemTemplate="{StaticResource PickerItemTemplate}"  
+                     Header="Taal / Language" 
+                     FullModeHeader="Taal / Language">
+                    </toolkit:ListPicker>
+                </StackPanel>
+            </phone:PanoramaItem>
+
+            <phone:PanoramaItem Header="{Binding Path=LocalizedResources.InfoAndSettingsPage_Contact_Header, Source={StaticResource LocalizedStrings}}">
+                <Grid x:Name="gContact" Grid.Row="1" Margin="12,0,12,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="204*" />
+                        <RowDefinition Height="77" />
+                        <RowDefinition Height="399" />
+                    </Grid.RowDefinitions>
+                    <TextBlock TextWrapping="Wrap" 
+                       Text="{Binding Path=LocalizedResources.InfoAndSettingsPage_Contact_Text, Source={StaticResource LocalizedStrings}}" 
+                       Grid.Row="0" FontSize="21.333" Margin="0,0,0,3" />
+                    <Button Grid.Row="1" x:Name="btnContact" Content="{Binding Path=LocalizedResources.InfoAndSettingsPage_Contact_ContactButton, Source={StaticResource LocalizedStrings}}" Height="76" VerticalAlignment="Top" Margin="0" />
+                    <Button Grid.Row="2" x:Name="btnReview" Content="{Binding Path=LocalizedResources.InfoAndSettingsPage_Contact_ReviewButton, Source={StaticResource LocalizedStrings}}" Height="76" VerticalAlignment="Top" Margin="0" />
+                </Grid>
+            </phone:PanoramaItem>
+
+            <phone:PanoramaItem Header="{Binding Path=LocalizedResources.InfoAndSettingsPage_Disclaimer_Header, Source={StaticResource LocalizedStrings}}">
+                <StackPanel x:Name="gDisclaimer" Margin="12,0,12,0">
+                    <TextBlock TextWrapping="Wrap" 
+                       Text="{Binding Path=LocalizedResources.InfoAndSettingsPage_Disclaimer_Text, Source={StaticResource LocalizedStrings}}" 
+                               FontSize="21.333" />
+                </StackPanel>
+            </phone:PanoramaItem>
+        </phone:Panorama>
+    </Grid>
+</phone:PhoneApplicationPage>
