@@ -13,10 +13,10 @@ using Platform::String;
 namespace NcxPppp
 {
 
-	LibRrrr::LibRrrr() {	
+	LibRrrr::LibRrrr() {
 
 	}
-	
+
 	Platform::String^ LibRrrr::route(Platform::String^ path, int from, int to, time_t time, uint8 arriveBy) {
 		tdata_t tdata;
 		auto pathConverted = PlatformStringToCharArray(path);
@@ -26,12 +26,26 @@ namespace NcxPppp
 
 		req.from = from;
 		req.to = to;
-		router_request_from_epoch(&req, &tdata, time);	
+		router_request_from_epoch(&req, &tdata, time);
 		req.arrive_by = arriveBy;
 
 		router_t router;
 		router_setup(&router, &tdata);
 		router_route(&router, &req);
+
+		// TODO: call router_result_dump
+
+		// repeat search in reverse to compact transfers
+		uint32_t n_reversals = req.arrive_by ? 1 : 2;
+		// but do not reverse requests starting on board (they cannot be compressed, earliest arrival is good enough)
+		if (req.start_trip_trip != NONE) n_reversals = 0;
+
+		// n_reversals = 0; // DEBUG turn off reversals
+		for (uint32_t i = 0; i < n_reversals; ++i) {
+			router_request_reverse (&router, &req); // handle case where route is not reversed
+			router_route (&router, &req);
+		}
+
 		char result_buf[OUTPUT_LEN];
 		router_result_dump(&router, &req, result_buf, OUTPUT_LEN);
 
@@ -51,7 +65,7 @@ namespace NcxPppp
 		int bufferSize = string->Length() + 1;
 		char* ansi = new char[bufferSize];
 		WideCharToMultiByte(CP_UTF8, 0, wideData, -1, ansi, bufferSize, NULL, NULL);
-		return std::unique_ptr<char>(ansi); 
+		return std::unique_ptr<char>(ansi);
 	}
 
 	std::wstring LibRrrr::ToWString(const char* utf8String, unsigned int length) {
