@@ -151,6 +151,9 @@
     <None Include="Properties\WMAppManifest.xml">
       <SubType>Designer</SubType>
     </None>
+    <Content Include="Images\LegTypes\ferry.png" />
+    <Content Include="Images\LegTypes\subway.png" />
+    <Content Include="Images\LegTypes\tram.png" />
     <Content Include="Images\LegTypes\walk.png" />
     <Content Include="Images\appbar.question.png" />
     <Content Include="Images\LegTypes\rail.png" />
