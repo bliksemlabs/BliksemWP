@@ -50,11 +50,11 @@
                 </ListBox.ItemTemplate>
             </ListBox>
             <StackPanel Grid.Row="1">
-                <StackPanel Name="progressPanel" Margin="12,0,12,36" Visibility="Collapsed">
-                    <ProgressBar Name="progress" IsIndeterminate="True" />
+                <StackPanel Name="progressPanel" Margin="12,0,12,56" Visibility="Collapsed">
+                    <ProgressBar Name="progress" Height="36"  Margin="0,0,0,12" IsIndeterminate="True" />
                     <TextBlock HorizontalAlignment="Center" Text="{Binding Path=LocalizedResources.DownloadUpdatePage_Downloading, Source={StaticResource LocalizedStrings}}" />
                 </StackPanel>
-                <Button Name="btnApply" Margin="12,36,12,0" IsEnabled="False" Height="80" Content="Apply" Click="btnApply_Click" />
+                <Button Name="btnApply" Margin="12,36,12,0" IsEnabled="False" Height="80" Content="{Binding Path=LocalizedResources.DownloadUpdatePage_Apply, Source={StaticResource LocalizedStrings}}" Click="btnApply_Click" />
             </StackPanel>
         </Grid>
         

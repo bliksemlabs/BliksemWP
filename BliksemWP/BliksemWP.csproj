@@ -146,7 +146,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <None Include="BliksemWP_2014_05_03_22_49_20.sap" />
     <None Include="packages.config" />
     <None Include="Properties\AppManifest.xml" />
     <None Include="Properties\WMAppManifest.xml">

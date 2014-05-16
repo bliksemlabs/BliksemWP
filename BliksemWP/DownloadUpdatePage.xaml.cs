@@ -21,8 +21,9 @@ namespace BliksemWP
         // Store the value we're downloading to be able to save it
         private DateTime indexCheckDateValue;
         private DataRegion currentSelected;
-        private Boolean stopsSucceeded;
-        private Boolean timetableSucceeded;
+        private int numberDownloadsDone = 0;
+        private Boolean stopsSucceeded = false;
+        private Boolean timetableSucceeded = false;
 
         public DownloadUpdatePage()
         {
@@ -74,14 +75,23 @@ namespace BliksemWP
         {
             HttpWebRequest req = HttpWebRequest.CreateHttp(INDEX_URL);
             req.Method = "HEAD";
-            req.BeginGetResponse(new AsyncCallback(VersionCheckResponseCallback), req);
+            req.BeginGetResponse(new AsyncCallback(VersionCheckResponseCallback), req);  
         }
 
         private void VersionCheckResponseCallback(IAsyncResult asyncResult) {
 
-            HttpWebRequest webRequest = (HttpWebRequest)asyncResult.AsyncState;
-            HttpWebResponse webResponse = (HttpWebResponse)webRequest.EndGetResponse(asyncResult);
-
+            HttpWebRequest webRequest;
+            HttpWebResponse webResponse = null;
+            try 
+            {
+                webRequest = (HttpWebRequest)asyncResult.AsyncState;
+                webResponse = (HttpWebResponse)webRequest.EndGetResponse(asyncResult);
+            }
+            catch (WebException ex)
+            {
+                GetSavedFile();
+            }
+            
             String lastModified = webResponse.Headers[HttpRequestHeader.LastModified];
             indexCheckDateValue = DateTime.Parse(lastModified);
 
@@ -91,11 +101,23 @@ namespace BliksemWP
             }
             else
             {
-                IsolatedStorageFile iso = IsolatedStorageFile.GetUserStoreForApplication();
+                GetSavedFile();
+            }
+        }
+
+        private void GetSavedFile()
+        {
+            IsolatedStorageFile iso = IsolatedStorageFile.GetUserStoreForApplication();
+            try
+            {
                 using (var stream = iso.OpenFile(App.INDEX_FILE_NAME, FileMode.Open, FileAccess.Read))
                 {
                     ParseAndUpdateIndex(stream);
                 }
+            }
+            catch (FileNotFoundException e)
+            {
+                MessageBox.Show("Error getting file");
             }
         }
 
@@ -148,12 +170,9 @@ namespace BliksemWP
                 {
                     SaveFile(e, App.GetCurrentDataFilePath(App.STOPS_DB_NAME, currentSelected.NameShort, false));
                     stopsSucceeded = true;
-                    CheckComplete();
                 }
-                else
-                {
-                    System.Diagnostics.Debug.WriteLine("Failed to download stops");
-                }
+                numberDownloadsDone += 1;
+                CheckComplete();
             };
             stopsClient.OpenReadAsync(new Uri(currentSelected.StopsDbLink));
 
@@ -164,19 +183,38 @@ namespace BliksemWP
                 {
                     SaveFile(e, App.GetCurrentDataFilePath(App.DATA_FILE_NAME, currentSelected.NameShort, false));
                     timetableSucceeded = true;
-                    CheckComplete();
                 }
+                numberDownloadsDone += 1;
+                CheckComplete();
             };
             timetableClient.OpenReadAsync(new Uri(currentSelected.TimetableLink));
         }
 
-       
+        private void setNewRegion()
+        {
+            IsolatedStorageSettings appSettings = IsolatedStorageSettings.ApplicationSettings;
+            if (appSettings.Contains(App.KEY_REGION))
+            {
+                appSettings[App.KEY_REGION] = currentSelected.NameShort;
+                appSettings[App.KEY_REGION_LONG] = currentSelected.NameLong;
+            }
+            else
+            {
+                appSettings.Add(App.KEY_REGION, currentSelected.NameShort);
+                appSettings.Add(App.KEY_REGION_LONG, currentSelected.NameLong);
+            }
+            appSettings.Save();
+        }
 
         private void CheckComplete()
         {
-            if (timetableSucceeded && stopsSucceeded)
+            if (numberDownloadsDone == 2)
             {
                 endDownloadProgress();
+                if (stopsSucceeded && timetableSucceeded)
+                {
+                    setNewRegion();
+                }                
                 NavigationService.GoBack();
             }
         }
@@ -185,6 +223,7 @@ namespace BliksemWP
         {
             btnApply.Visibility = Visibility.Visible;
             progressPanel.Visibility = Visibility.Collapsed;
+            numberDownloadsDone = 0;
             stopsSucceeded = true;
             timetableSucceeded = true;
         }
@@ -192,6 +231,7 @@ namespace BliksemWP
         {
             btnApply.Visibility = Visibility.Collapsed;
             progressPanel.Visibility = Visibility.Visible;
+            numberDownloadsDone = 0;
             stopsSucceeded = false;
             timetableSucceeded = false;
         }

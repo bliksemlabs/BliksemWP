@@ -27,7 +27,6 @@ namespace BliksemWP
         {
             InitializeComponent();
             LayoutRoot.VerticalScrollBarVisibility = ScrollBarVisibility.Disabled;
-            SetupDB();
 
             Loaded += MainPage_Loaded;
 
@@ -39,6 +38,8 @@ namespace BliksemWP
 
         private void MainPage_Loaded(object sender, RoutedEventArgs e)
         {
+            SetupDB();
+
             // Set the current region
             labelRegion.Text = (string)IsolatedStorageSettings.ApplicationSettings[App.KEY_REGION_LONG];
         }
