@@ -29,7 +29,14 @@
 
             <StackPanel x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
                 <TextBlock Margin="12,0,12,0" Text="{Binding Path=LocalizedResources.MainPage_Region, Source={StaticResource LocalizedStrings}}"/>
-                <TextBlock Margin="12,12,12,12" Name="labelRegion" />
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Margin="12,12,12,12" Grid.Column="0" Name="labelRegion" Style="{StaticResource PhoneTextLargeStyle}" />
+                    <Button x:Name="btnUpdate" Grid.Column="1" Click="btnUpdate_Click" Content="->"/>
+                </Grid>
                 <TextBlock Margin="12,0,12,0" Text="{Binding Path=LocalizedResources.MainPage_From, Source={StaticResource LocalizedStrings}}"/>
                 <toolkit:AutoCompleteBox HorizontalAlignment="Left" Width="455"
                                FilterMode="None"
@@ -73,7 +80,6 @@
                 </Grid>
 
                 <Button x:Name="btnStart" Click="btnStart_Click" Content="{Binding Path=LocalizedResources.MainPage_Calculate, Source={StaticResource LocalizedStrings}}"/>
-                <Button x:Name="btnUpdate" Click="btnUpdate_Click" Content="{Binding Path=LocalizedResources.MainPage_Update, Source={StaticResource LocalizedStrings}}"/>
 
             </StackPanel>
         </Grid>
