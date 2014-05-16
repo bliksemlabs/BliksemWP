@@ -80,7 +80,12 @@ namespace BliksemWP
             return GetCurrentDataFilePath(filename, false);
         }
 
-        public static string GetCurrentDataFilePath(string filename, Boolean relative) {
+        public static string GetCurrentDataFilePath(string filename, Boolean relative)
+        {
+            return GetCurrentDataFilePath(filename, GetRegion(), relative);
+        }
+
+        public static string GetCurrentDataFilePath(string filename, string region, Boolean relative) {
             if (filename == null)
             {
                 filename = "";
@@ -92,7 +97,7 @@ namespace BliksemWP
             }
             else
             {
-                pieces = new string[] { ApplicationData.Current.LocalFolder.Path, GetRegion(), filename };
+                pieces = new string[] { ApplicationData.Current.LocalFolder.Path, region, filename };
             }
             return Path.Combine(pieces);
 

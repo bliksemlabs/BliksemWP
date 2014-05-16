@@ -17,9 +17,12 @@ namespace BliksemWP
     public partial class DownloadUpdatePage : PhoneApplicationPage
     {
         private static readonly Uri INDEX_URL = new Uri("https://1313.nl/v3/index.json");
+
         // Store the value we're downloading to be able to save it
         private DateTime indexCheckDateValue;
         private DataRegion currentSelected;
+        private Boolean stopsSucceeded;
+        private Boolean timetableSucceeded;
 
         public DownloadUpdatePage()
         {
@@ -38,12 +41,19 @@ namespace BliksemWP
             WebClient indexClient = new WebClient();
             indexClient.OpenReadCompleted += (s, e) =>
             {
-                ParseAndUpdateIndex(e.Result);
-                SaveFile(e, App.INDEX_FILE_NAME);
-                // Update last saved
-                IsolatedStorageSettings appSettings = IsolatedStorageSettings.ApplicationSettings;
-                appSettings["indexLastUpdated"] = indexCheckDateValue;
-                appSettings.Save();
+                if (e.Error == null && !e.Cancelled)
+                {
+                    ParseAndUpdateIndex(e.Result);
+                    SaveFile(e, App.INDEX_FILE_NAME);
+                    // Update last saved
+                    IsolatedStorageSettings appSettings = IsolatedStorageSettings.ApplicationSettings;
+                    appSettings["indexLastUpdated"] = indexCheckDateValue;
+                    appSettings.Save();
+                }
+                else
+                {
+                    System.Diagnostics.Debug.WriteLine("Failed to download stops");
+                }
             };
             indexClient.OpenReadAsync(INDEX_URL);
         }
@@ -100,11 +110,7 @@ namespace BliksemWP
             return storeLastUpdated;
         }
 
-        void WebClient_OpenReadStopsCompleted(object sender, OpenReadCompletedEventArgs e)
-        {
-            SaveFile(e, App.STOPS_DB_NAME);
-        }
-
+  
         private static void SaveFile(OpenReadCompletedEventArgs e, String filename)
         {
             var file = IsolatedStorageFile.GetUserStoreForApplication();
@@ -129,10 +135,65 @@ namespace BliksemWP
                 btnApply.IsEnabled = true;
             }    
         }
-
-        private void btnApply_Click(object sender, RoutedEventArgs e)
+        
+        private void btnApply_Click(object sender, RoutedEventArgs clickEvent)
         {
+            startDownloadProgress();
 
+            // Setup clients
+            WebClient stopsClient = new WebClient();
+            stopsClient.OpenReadCompleted += (s, e) =>
+            {
+                if (e.Error == null && !e.Cancelled)
+                {
+                    SaveFile(e, App.GetCurrentDataFilePath(App.STOPS_DB_NAME, currentSelected.NameShort, false));
+                    stopsSucceeded = true;
+                    CheckComplete();
+                }
+                else
+                {
+                    System.Diagnostics.Debug.WriteLine("Failed to download stops");
+                }
+            };
+            stopsClient.OpenReadAsync(new Uri(currentSelected.StopsDbLink));
+
+            WebClient timetableClient = new WebClient();
+            timetableClient.OpenReadCompleted += (s, e) =>
+            {
+                if (e.Error == null && !e.Cancelled)
+                {
+                    SaveFile(e, App.GetCurrentDataFilePath(App.DATA_FILE_NAME, currentSelected.NameShort, false));
+                    timetableSucceeded = true;
+                    CheckComplete();
+                }
+            };
+            timetableClient.OpenReadAsync(new Uri(currentSelected.TimetableLink));
+        }
+
+       
+
+        private void CheckComplete()
+        {
+            if (timetableSucceeded && stopsSucceeded)
+            {
+                endDownloadProgress();
+                NavigationService.GoBack();
+            }
+        }
+
+        private void endDownloadProgress()
+        {
+            btnApply.Visibility = Visibility.Visible;
+            progressPanel.Visibility = Visibility.Collapsed;
+            stopsSucceeded = true;
+            timetableSucceeded = true;
+        }
+        private void startDownloadProgress()
+        {
+            btnApply.Visibility = Visibility.Collapsed;
+            progressPanel.Visibility = Visibility.Visible;
+            stopsSucceeded = false;
+            timetableSucceeded = false;
         }
     }
 }

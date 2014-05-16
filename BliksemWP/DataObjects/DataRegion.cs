@@ -22,6 +22,12 @@ namespace BliksemWP.DataObjects
         public string NameShort { get; set; }
         [DataMember(Name="longName")]
         public string NameLong { get; set; }
+
+        [DataMember(Name = "stopsDb")]
+        public string StopsDbLink { get; set; }
+
+        [DataMember(Name = "timetable")]
+        public string TimetableLink { get; set; }
         
         [DataMember(Name="validity")]
         public Validity DataValidity { get; set; }

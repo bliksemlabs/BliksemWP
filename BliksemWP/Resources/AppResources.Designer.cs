@@ -61,6 +61,24 @@ namespace BliksemWP.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Apply.
+        /// </summary>
+        public static string DownloadUpdatePage_Apply {
+            get {
+                return ResourceManager.GetString("DownloadUpdatePage_Apply", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Downloading....
+        /// </summary>
+        public static string DownloadUpdatePage_Downloading {
+            get {
+                return ResourceManager.GetString("DownloadUpdatePage_Downloading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Last updated.
         /// </summary>
         public static string DownloadUpdatePage_LastUpdate {
