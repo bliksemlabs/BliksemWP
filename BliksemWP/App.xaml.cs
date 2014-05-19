@@ -12,6 +12,8 @@ using Windows.Storage;
 using System.IO;
 using System.IO.IsolatedStorage;
 using SQLiteWinRT;
+using System.Threading.Tasks;
+using System.Threading;
 
 namespace BliksemWP
 {
@@ -63,17 +65,24 @@ namespace BliksemWP
         // This code will not execute when the application is reactivated
         private async void Application_Launching(object sender, LaunchingEventArgs e)
         {
+            await SetupDataFiles();
+        }
+
+        private async Task SetupDataFiles()
+        {
             Boolean copiedStops = !IsolatedStorageFile.GetUserStoreForApplication().FileExists(GetCurrentDataFilePath(STOPS_DB_NAME));
 
-            await copyResourceFile(GetCurrentDataFilePath(null), STOPS_DB_NAME);
+            copyResourceFile(GetCurrentDataFilePath(null), STOPS_DB_NAME).ContinueWith(t => PrepareFTSDatabase(copiedStops));
             await copyResourceFile(GetCurrentDataFilePath(null), DATA_FILE_NAME);
+        }
 
+        private async Task PrepareFTSDatabase(bool copiedStops)
+        {
             // Only do this if we (re)loaded the database 
             if (copiedStops)
             {
-                PrepareFTSDatabase();
+                await PrepareFTSDatabase();
             }
-
         }
 
         public static string GetCurrentDataFilePath(string filename)
@@ -156,7 +165,7 @@ namespace BliksemWP
             }
         }
 
-        async void PrepareFTSDatabase()
+        private async Task PrepareFTSDatabase()
         {
             // Get the file from the install location  
             var file = await ApplicationData.Current.LocalFolder.GetFileAsync(GetCurrentDataFilePath(STOPS_DB_NAME));
@@ -171,6 +180,7 @@ namespace BliksemWP
             await db.ExecuteStatementAsync("CREATE VIRTUAL TABLE stops USING fts4(stopindex, stopname);");
 
             db.Dispose();
+
         }
 
         // Code to execute when the application is activated (brought to foreground)

@@ -212,6 +212,9 @@
   <data name="JourneyLegControl_Walk" xml:space="preserve">
     <value>Loop</value>
   </data>
+  <data name="MainPage_AppBar_ChangeRegion" xml:space="preserve">
+    <value>kies regio</value>
+  </data>
   <data name="MainPage_Calculate" xml:space="preserve">
     <value>Plan!</value>
   </data>

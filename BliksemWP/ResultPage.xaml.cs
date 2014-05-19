@@ -32,32 +32,23 @@ namespace BliksemWP
             String fromString, toString, dateString, timeString;
             progressBar.Visibility = Visibility.Visible;
 
-            //TODO: remove test code after designing is finished
-            //if (!NavigationContext.QueryString.Any())
-            //{
-            //    fromStopId = 40094;
-            //    toStopId = 34295;
-            //    requestTime = new DateTime(2014, 05, 06, 10, 00, 00);
-            //}
-            //else
-            //{
-                if (NavigationContext.QueryString.TryGetValue("from", out fromString))
-                {
-                    fromStopId = Convert.ToInt32(fromString);
-                }
-                if (NavigationContext.QueryString.TryGetValue("to", out toString))
-                {
-                    toStopId = Convert.ToInt32(toString);
-                }
-                if (NavigationContext.QueryString.TryGetValue("date", out dateString) && NavigationContext.QueryString.TryGetValue("time", out timeString))
-                {
-                    requestTime = DateTime.Parse(dateString + " " + timeString);
-                }
-            //}
+            if (NavigationContext.QueryString.TryGetValue("from", out fromString))
+            {
+                fromStopId = Convert.ToInt32(fromString);
+            }
+            if (NavigationContext.QueryString.TryGetValue("to", out toString))
+            {
+                toStopId = Convert.ToInt32(toString);
+            }
+            if (NavigationContext.QueryString.TryGetValue("date", out dateString) && NavigationContext.QueryString.TryGetValue("time", out timeString))
+            {
+                requestTime = DateTime.Parse(dateString + " " + timeString);
+            }
 
             var router = new NcxPppp.LibRrrr();
             long seconds = Convert.ToUInt32((requestTime - new DateTime(1970, 1, 1).ToLocalTime()).TotalSeconds);
             var reisadvies = router.route(App.GetCurrentDataFilePath(App.DATA_FILE_NAME), fromStopId, toStopId, seconds, 0);
+            // await async
             if (reisadvies.Length > 1)
             {
                 ResultConverter c = new ResultConverter(reisadvies);

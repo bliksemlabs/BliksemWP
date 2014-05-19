@@ -180,7 +180,7 @@
     <value>Info</value>
   </data>
   <data name="InfoAndSettingsPage_Info_Message" xml:space="preserve">
-    <value>Hier een leuk info tekstje</value>
+    <value>Bliksem is an implementation of a new routing algorithm by Microsoft, that enables us to plan your route offline and on your phone. Offline has advantages because you'll always have your schedules with you, ensuring continuity and privacy.</value>
   </data>
   <data name="InfoAndSettingsPage_Info_Version" xml:space="preserve">
     <value>Version: {0}</value>
@@ -189,7 +189,7 @@
     <value>Privacy</value>
   </data>
   <data name="InfoAndSettingsPage_Privacy_Text" xml:space="preserve">
-    <value>This application uses an internet connection to update the timetable</value>
+    <value>This application uses an internet connection to update the timetable. The application will never ask for your location </value>
   </data>
   <data name="InfoAndSettingsPage_Privacy_Title" xml:space="preserve">
     <value>Privacy Statement</value>
@@ -205,6 +205,9 @@
   </data>
   <data name="JourneyLegControl_Walk" xml:space="preserve">
     <value>Walk</value>
+  </data>
+  <data name="MainPage_AppBar_ChangeRegion" xml:space="preserve">
+    <value>choose region</value>
   </data>
   <data name="MainPage_AppBar_Info" xml:space="preserve">
     <value>info and settings</value>

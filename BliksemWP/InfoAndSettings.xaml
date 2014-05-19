@@ -39,8 +39,11 @@
                 <StackPanel x:Name="gPrivacy" Margin="12,0,12,0">
                     <TextBlock Text="{Binding Path=LocalizedResources.InfoAndSettingsPage_Privacy_Title, Source={StaticResource LocalizedStrings}}" FontSize="30" />
                     <TextBlock TextWrapping="Wrap" 
-                       Text="{Binding Path=LocalizedResources.InfoAndSettingsPage_Privacy_Text, Source={StaticResource LocalizedStrings}}" 
-                               FontSize="21.333" />
+                               FontSize="21.333" >
+                    	<Run Text="{Binding Path=LocalizedResources.InfoAndSettingsPage_Privacy_Text, Source={StaticResource LocalizedStrings}}"/>
+                    	<LineBreak/>
+                    	<Run/>
+                    </TextBlock>
                 </StackPanel>
             </phone:PanoramaItem>
 

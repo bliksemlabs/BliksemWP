@@ -8,6 +8,7 @@ using BliksemWP.Helpers;
 using BliksemWP.Resources;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Tasks;
+using System;
 
 namespace BliksemWP
 {
@@ -69,6 +70,7 @@ namespace BliksemWP
             emailcomposer.Body = "";
             emailcomposer.Show();
         }
+
         private int NthOccurence(string s, char t, int n)
         {
             return Regex.Matches(s, "[" + t + "]")[n - 1].Index;

@@ -120,7 +120,7 @@
       <DependentUpon>DownloadUpdatePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Resources\AppResources.Designer.cs">
+    <Compile Include="Resources\AppResources1.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>AppResources.resx</DependentUpon>
@@ -129,6 +129,7 @@
       <DependentUpon>ResultPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Stop.cs" />
+    <Compile Include="TResult.cs" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -208,7 +209,7 @@
     <EmbeddedResource Include="Resources\AppResources.nl-NL.resx" />
     <EmbeddedResource Include="Resources\AppResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>AppResources.Designer.cs</LastGenOutput>
+      <LastGenOutput>AppResources1.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

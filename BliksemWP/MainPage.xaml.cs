@@ -83,11 +83,6 @@ namespace BliksemWP
 
         }
 
-        void btnUpdate_Click(object sender, RoutedEventArgs e)
-        {
-            NavigationService.Navigate(new Uri("/DownloadUpdatePage.xaml", UriKind.Relative));
-        }
-
         /// <summary>
         /// Full Text Searches sqlite db for stops name to autocomplete
         /// </summary>
@@ -141,6 +136,15 @@ namespace BliksemWP
             ApplicationBarMenuItem appBarMenuItemInfo = new ApplicationBarMenuItem(AppResources.MainPage_AppBar_Info);
             ApplicationBar.MenuItems.Add(appBarMenuItemInfo);
             appBarMenuItemInfo.Click += ApplicationBarMenuItemInfoSettings_Click;
+
+            ApplicationBarMenuItem appBarMenuItemRegion = new ApplicationBarMenuItem(AppResources.MainPage_AppBar_ChangeRegion);
+            ApplicationBar.MenuItems.Add(appBarMenuItemRegion);
+            appBarMenuItemRegion.Click += ApplicationBarMenuItemRegion_Click;
+        }
+
+        private void ApplicationBarMenuItemRegion_Click(object sender, EventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/DownloadUpdatePage.xaml", UriKind.Relative));
         }
 
         private void ApplicationBarMenuItemInfoSettings_Click(object sender, EventArgs e)
