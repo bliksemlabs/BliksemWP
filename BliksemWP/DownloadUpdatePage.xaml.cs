@@ -53,7 +53,7 @@ namespace BliksemWP
                 }
                 else
                 {
-                    System.Diagnostics.Debug.WriteLine("Failed to download stops");
+                    System.Diagnostics.Debug.WriteLine("Failed to download regions");
                 }
             };
             indexClient.OpenReadAsync(INDEX_URL);
@@ -174,6 +174,7 @@ namespace BliksemWP
                 numberDownloadsDone += 1;
                 CheckComplete();
             };
+           
             stopsClient.OpenReadAsync(new Uri(currentSelected.StopsDbLink));
 
             WebClient timetableClient = new WebClient();
