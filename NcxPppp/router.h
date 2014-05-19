@@ -188,5 +188,7 @@ uint32_t rrrrandom(uint32_t limit);
 
 uint32_t rrrrandom_stop_by_agency(tdata_t *td, uint16_t agency_index);
 
+void router_do_magic(char *filename, char *result_buf, int from, int to, time_t time, uint16_t arriveBy);
+
 #endif // _ROUTER_H
 

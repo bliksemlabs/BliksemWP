@@ -1214,3 +1214,37 @@ time_t req_to_epoch (router_request_t *req, tdata_t *tdata, struct tm *tm_out) {
 
     return seconds;
 }
+
+void router_do_magic(char *filename, char *result_buf, int from, int to, time_t time, uint16_t arriveBy) {
+	tdata_t tdata;
+	router_t router;
+	router_request_t req;
+	uint32_t n_reversals;
+	uint32_t i;
+
+	tdata_load(filename, &tdata);
+	router_request_initialize(&req);
+
+	req.from = from;
+	req.to = to;
+	router_request_from_epoch(&req, &tdata, time);
+	req.arrive_by = arriveBy;
+
+	
+	router_setup(&router, &tdata);
+	router_route(&router, &req);
+
+	// repeat search in reverse to compact transfers
+	/*n_reversals = req.arrive_by ? 1 : 2;
+	// but do not reverse requests starting on board (they cannot be compressed, earliest arrival is good enough)
+	if (req.start_trip_trip != NONE) n_reversals = 0;
+
+	// n_reversals = 0; // DEBUG turn off reversals
+	
+	for (i = 0; i < n_reversals; ++i) {
+		router_request_reverse(&router, &req); // handle case where route is not reversed
+		router_route(&router, &req);
+	}*/
+
+	router_result_dump(&router, &req, result_buf, OUTPUT_LEN);
+}

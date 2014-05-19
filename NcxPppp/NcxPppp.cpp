@@ -1,14 +1,16 @@
 ﻿// NcxPppp.cpp
 #include "NcxPppp.h"
-
+#include <ppltasks.h>
 extern "C" {
 	#include "config.h"
 	#include "tdata.h"
 	#include "router.h"
 }
-using namespace NcxPppp;
+using namespace concurrency;
+using namespace Windows::Foundation;
 using namespace Platform;
-using Platform::String;
+
+using namespace NcxPppp;	
 
 namespace NcxPppp
 {
@@ -18,36 +20,10 @@ namespace NcxPppp
 	}
 
 	Platform::String^ LibRrrr::route(Platform::String^ path, int from, int to, time_t time, uint8 arriveBy) {
-		tdata_t tdata;
 		auto pathConverted = PlatformStringToCharArray(path);
-		tdata_load(pathConverted.get(), &tdata);
-		router_request_t req;
-		router_request_initialize(&req);
-
-		req.from = from;
-		req.to = to;
-		router_request_from_epoch(&req, &tdata, time);
-		req.arrive_by = arriveBy;
-
-		router_t router;
-		router_setup(&router, &tdata);
-		router_route(&router, &req);
-
-		// TODO: call router_result_dump
-
-		// repeat search in reverse to compact transfers
-		uint32_t n_reversals = req.arrive_by ? 1 : 2;
-		// but do not reverse requests starting on board (they cannot be compressed, earliest arrival is good enough)
-		if (req.start_trip_trip != NONE) n_reversals = 0;
-
-		// n_reversals = 0; // DEBUG turn off reversals
-		for (uint32_t i = 0; i < n_reversals; ++i) {
-			router_request_reverse (&router, &req); // handle case where route is not reversed
-			router_route (&router, &req);
-		}
-
+		
 		char result_buf[OUTPUT_LEN];
-		router_result_dump(&router, &req, result_buf, OUTPUT_LEN);
+		router_do_magic(pathConverted.get(), result_buf, from, to, time, arriveBy);
 
 		// Do string magic
 		int size = MultiByteToWideChar(CP_ACP, 0, result_buf, -1, NULL, 0);
@@ -58,6 +34,13 @@ namespace NcxPppp
 		}
 		Platform::String^ output = ToPlatformString(result_buf, OUTPUT_LEN);
 		return output;
+	}
+
+	IAsyncOperation<String^>^ LibRrrr::routeAsync(Platform::String^ path, int from, int to, time_t time, uint8 arriveBy) {
+		return concurrency::create_async([=](){
+			return route(path, from, to, time, arriveBy); 
+		}
+		);
 	}
 
 	std::unique_ptr<char> LibRrrr::PlatformStringToCharArray(String^ string) {
