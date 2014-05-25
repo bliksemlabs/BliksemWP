@@ -129,7 +129,6 @@
       <DependentUpon>ResultPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Stop.cs" />
-    <Compile Include="TResult.cs" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
