@@ -27,10 +27,14 @@
 
 WINBASEAPI LPVOID WINAPI MapViewOfFileFromApp(HANDLE, ULONG, ULONG64, SIZE_T);
 WINBASEAPI HANDLE WINAPI CreateFileMappingFromApp(HANDLE, LPSECURITY_ATTRIBUTES, ULONG, ULONG64, LPCWSTR);
+WINBASEAPI BOOL WINAPI UnmapViewOfFile(LPCVOID);
 #define osCreateFile ((HANDLE(WINAPI*)(LPCWSTR,DWORD,DWORD,DWORD, LPCREATEFILE2_EXTENDED_PARAMETERS))(HANDLE)CreateFile2)
 #define osCreateFileMappingFromApp ((HANDLE(WINAPI*)(HANDLE,LPSECURITY_ATTRIBUTES,ULONG,ULONG64,LPCWSTR))(HANDLE)CreateFileMappingFromApp)
 #define osMapViewOfFileFromApp ((LPVOID(WINAPI*)(HANDLE,ULONG,ULONG64, SIZE_T))(LPVOID)MapViewOfFileFromApp)
+#define osUnmapViewOfFile ((BOOL(WINAPI*)(LPCVOID))(BOOL)UnmapViewOfFile)
+#define osCloseHandle ((BOOL(WINAPI*)(HANDLE))(BOOL)CloseHandle)
 #define osGetLastError ((DWORD(WINAPI*)(VOID))(DWORD)GetLastError)
+
 
 // file-visible struct
 typedef struct tdata_header tdata_header_t;
@@ -330,9 +334,8 @@ void tdata_check_coherent (tdata_t *tdata) {
 
 /* Map an input file into memory and reconstruct pointers to its contents. */
 
-void tdata_load(char *filename, tdata_t *td) {
+HANDLE tdata_load(char *filename, tdata_t *td) {
 	DWORD dwFlagsAndAttributes = 0;
-	DWORD d;
 	struct stat st;
 	wchar_t* wideName;
 	size_t nameLen;
@@ -346,7 +349,6 @@ void tdata_load(char *filename, tdata_t *td) {
 	mbstowcs_s(&convertedChars, wideName, nameLen + 1, filename, nameLen);
 	fd = osCreateFile(wideName, GENERIC_READ, FILE_SHARE_READ, OPEN_EXISTING, 0);
 	free(wideName);
-	d = osGetLastError();
     if (stat(filename, &st) == -1)
         die("could not stat input file");
 
@@ -399,12 +401,19 @@ void tdata_load(char *filename, tdata_t *td) {
     // This is probably a bit slow and is not strictly necessary, but does page in all the timetable entries.
     tdata_check_coherent(td);
     // D tdata_dump(td);
-
+	return mapping;
 }
 
-void tdata_close(tdata_t *td) {
-	// t.otdo
+void tdata_close(tdata_t *td, HANDLE mapping) {
+	// t.otdou
     //munmap(td->base, td->size);
+	if (!osUnmapViewOfFile(td->base)) {
+		die(osGetLastError());
+	}
+
+	if (!osCloseHandle(mapping)) {
+		die(osGetLastError());
+	}
 }
 
 // TODO should pass pointer to tdata?

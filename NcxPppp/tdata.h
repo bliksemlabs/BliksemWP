@@ -148,9 +148,9 @@ struct tdata {
     #endif
 };
 
-void tdata_load(char* filename, tdata_t *td);
+HANDLE tdata_load(char* filename, tdata_t *td);
 
-void tdata_close(tdata_t *td);
+void tdata_close(tdata_t *td, HANDLE mapping);
 
 void tdata_dump(tdata_t *td);
 
