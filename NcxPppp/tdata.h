@@ -215,6 +215,8 @@ char *tdata_agency_name_for_route(tdata_t *td, uint32_t route_index);
 
 char *tdata_agency_url_for_route(tdata_t *td, uint32_t route_index);
 
+latlon_t *tdata_location_for_index(tdata_t *td, uint32_t stop_index);
+
 /* Returns a pointer to the first stoptime for the trip (VehicleJourney). These are generally TimeDemandTypes that must
    be shifted in time to get the true scheduled arrival and departure times. */
 stoptime_t *tdata_timedemand_type(tdata_t *td, uint32_t route_index, uint32_t trip_index);

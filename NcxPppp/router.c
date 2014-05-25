@@ -904,7 +904,9 @@ static char *plan_render_itinerary (struct itinerary *itin, tdata_t *tdata, char
         char *short_name = (leg->route == WALK) ? "walk" : tdata_shortname_for_route (tdata, leg->route);
         char *headsign = (leg->route == WALK) ? "walk" : tdata_headsign_for_route (tdata, leg->route);
         char *productcategory = (leg->route == WALK) ? "" : tdata_productcategory_for_route (tdata, leg->route);
-		
+		latlon_t *s0_loc = tdata_location_for_index(tdata, leg->s0);
+		latlon_t *s1_loc = tdata_location_for_index(tdata, leg->s1);
+
         char *leg_mode = NULL;
 	char *alert_msg;
         btimetext(leg->t0, ct0);
@@ -957,9 +959,9 @@ static char *plan_render_itinerary (struct itinerary *itin, tdata_t *tdata, char
         }
 #endif
 
-		b += sprintf_s(b, 255, "%s;%5d;%3d;%5d;%5d;%s;%s;+0;%s;%s;%s;%s;%s;%s;%s\n",
+		b += sprintf_s(b, 255, "%s;%5d;%3d;%5d;%5d;%s;%s;+0;%s;%s;%s;%s;%s;%s;%.5f;%.5f;%.5f;%.5f\n",
             leg_mode, leg->route, leg->trip, leg->s0, leg->s1, ct0, ct1, agency_name, short_name, headsign, productcategory, s0_id, s1_id,
-            (alert_msg ? alert_msg : ""));
+			s0_loc->lat, s0_loc->lon, s1_loc->lat, s1_loc->lon);
 
         /* EXAMPLE
         polyline_for_leg (tdata, leg);

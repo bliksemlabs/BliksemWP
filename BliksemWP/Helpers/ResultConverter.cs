@@ -74,6 +74,12 @@ namespace BliksemWP.Helpers
             journeyLeg.ProductName = columns[9];
             journeyLeg.ProductCategory = columns[11];
 
+            journeyLeg.DepartureLatitude = columns[14];
+            journeyLeg.DepartureLongitude = columns[15];
+
+            journeyLeg.ArrivalLatitude = columns[16];
+            journeyLeg.ArrivalLongitude = columns[17];
+
             return journeyLeg;
         }
 

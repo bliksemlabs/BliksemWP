@@ -27,9 +27,9 @@
 
 WINBASEAPI LPVOID WINAPI MapViewOfFileFromApp(HANDLE, ULONG, ULONG64, SIZE_T);
 WINBASEAPI HANDLE WINAPI CreateFileMappingFromApp(HANDLE, LPSECURITY_ATTRIBUTES, ULONG, ULONG64, LPCWSTR);
-#define ietsCreateFile2 ((HANDLE(WINAPI*)(LPCWSTR,DWORD,DWORD,DWORD, LPCREATEFILE2_EXTENDED_PARAMETERS))(HANDLE)CreateFile2)
-#define ietsCreateFileMappingFromApp ((HANDLE(WINAPI*)(HANDLE,LPSECURITY_ATTRIBUTES,ULONG,ULONG64,LPCWSTR))(HANDLE)CreateFileMappingFromApp)
-#define ietsMapViewOfFileFromApp ((LPVOID(WINAPI*)(HANDLE,ULONG,ULONG64, SIZE_T))(LPVOID)MapViewOfFileFromApp)
+#define osCreateFile ((HANDLE(WINAPI*)(LPCWSTR,DWORD,DWORD,DWORD, LPCREATEFILE2_EXTENDED_PARAMETERS))(HANDLE)CreateFile2)
+#define osCreateFileMappingFromApp ((HANDLE(WINAPI*)(HANDLE,LPSECURITY_ATTRIBUTES,ULONG,ULONG64,LPCWSTR))(HANDLE)CreateFileMappingFromApp)
+#define osMapViewOfFileFromApp ((LPVOID(WINAPI*)(HANDLE,ULONG,ULONG64, SIZE_T))(LPVOID)MapViewOfFileFromApp)
 #define osGetLastError ((DWORD(WINAPI*)(VOID))(DWORD)GetLastError)
 
 // file-visible struct
@@ -240,6 +240,17 @@ char *tdata_agency_url_for_route(tdata_t *td, uint32_t route_index) {
     return td->agency_urls + (td->agency_urls_width * route.agency_index);
 }
 
+latlon_t *tdata_location_for_index(tdata_t *td, uint32_t stop_index) {
+	switch (stop_index) {
+	case NONE:
+		return NULL;
+	case ONBOARD:
+		return NULL;
+	default:
+		return &td->stop_coords[stop_index];
+	}
+}
+
 void tdata_check_coherent (tdata_t *tdata) {
 	uint32_t s, r;
     /* Check that all lat/lon look like valid coordinates. */
@@ -329,33 +340,30 @@ void tdata_load(char *filename, tdata_t *td) {
 	char *b;
 	size_t convertedChars = 0;
 	tdata_header_t *header;
-	OutputDebugString(L"tdata load_c");
-	OutputDebugString(L"ietsCreateFile2\n");
+
 	nameLen = strlen(filename);
 	wideName = malloc((nameLen + 1) * sizeof(wchar_t));
 	mbstowcs_s(&convertedChars, wideName, nameLen + 1, filename, nameLen);
-	fd = ietsCreateFile2(wideName, GENERIC_READ, FILE_SHARE_READ, OPEN_EXISTING, 0);
+	fd = osCreateFile(wideName, GENERIC_READ, FILE_SHARE_READ, OPEN_EXISTING, 0);
 	free(wideName);
 	d = osGetLastError();
     if (stat(filename, &st) == -1)
         die("could not stat input file");
-	OutputDebugString(L"ietsCreateFileMappingFromApp\n");
-	mapping = (HANDLE)ietsCreateFileMappingFromApp(fd, NULL, PAGE_READONLY, st.st_size, NULL);
-	OutputDebugString(L"ietsMapViewOfFileFromApp\n");
-	td->base = (char *)ietsMapViewOfFileFromApp(mapping, FILE_MAP_READ, 0, st.st_size);
+
+	mapping = (HANDLE)osCreateFileMappingFromApp(fd, NULL, PAGE_READONLY, st.st_size, NULL);
+	td->base = (char *)osMapViewOfFileFromApp(mapping, FILE_MAP_READ, 0, st.st_size);
     td->size = st.st_size;
     if (td->base == (void*)(-1))
         die("could not map input file");
 
     b = (char *) td->base;
     header = (tdata_header_t *) b;
-	OutputDebugString(L"strncmp(TTABLEV3, header->\n");
+	
     if( strncmp("TTABLEV3", header->version_string, 8) )
         die("the input file does not appear to be a timetable or is of the wrong version");
 	OutputDebugString(L"td->calendar_start_time\n");
 
     /* Check if this works properly in Visual Studio */
-
 	td->calendar_start_time = header->calendar_start_time;
 	td->dst_active = header->dst_active;
     load_mmap (b, stops, stop_t);
@@ -384,49 +392,6 @@ void tdata_load(char *filename, tdata_t *td) {
     load_mmap_string (b, route_shortnames);
     load_mmap_string (b, route_ids);
     load_mmap_string (b, productcategories);
-
-/*
-    td->calendar_start_time = header->calendar_start_time;
-    td->dst_active = header->dst_active;
-    td->n_stops = header->n_stops;
-    td->n_routes = header->n_routes;
-    td->n_trips = header->n_trips;
-    td->stops = (stop_t*) (b + header->loc_stops);
-    td->stop_attributes = (uint8_t*) (b + header->loc_stop_attributes);
-    td->stop_coords = (latlon_t*) (b + header->loc_stop_coords);
-    td->routes = (route_t*) (b + header->loc_routes);
-    td->route_stops = (uint32_t *) b + header->loc_route_stops;
-    td->route_stop_attributes = (uint8_t *) (b + header->loc_route_stop_attributes);
-    td->stop_times = (stoptime_t*) (b + header->loc_stop_times);
-    td->trips = (trip_t*) (b + header->loc_trips);
-    td->stop_routes = (uint32_t *) (b + header->loc_stop_routes);
-    td->transfer_target_stops = (uint32_t *) (b + header->loc_transfer_target_stops);
-    td->transfer_dist_meters = (uint8_t *) (b + header->loc_transfer_dist_meters);
-    //maybe replace with pointers because there's a lot of wasted space?
-    td->platformcodes_width = *((uint32_t *) (b + header->loc_platformcodes));
-    td->platformcodes = (char*) (b + header->loc_platformcodes + sizeof(uint32_t));
-    td->stop_names = (char*) (b + header->loc_stop_names);
-    td->stop_nameidx = (uint32_t *) (b + header->loc_stop_nameidx);
-    td->agency_ids_width = *((uint32_t *) (b + header->loc_agency_ids));
-    td->agency_ids = (char*) (b + header->loc_agency_ids + sizeof(uint32_t));
-    td->agency_names_width = *((uint32_t *) (b + header->loc_agency_names));
-    td->agency_names = (char*) (b + header->loc_agency_names + sizeof(uint32_t));
-    td->agency_url_width = *((uint32_t *) (b + header->loc_agency_urls));
-    td->agency_urls = (char*) (b + header->loc_agency_urls + sizeof(uint32_t));
-    td->headsigns = (char*) (b + header->loc_headsigns);
-    td->route_shortnames_width = *((uint32_t *) (b + header->loc_route_shortnames));
-    td->route_shortnames = (char*) (b + header->loc_route_shortnames + sizeof(uint32_t));
-    td->productcategories_width = *((uint32_t *) (b + header->loc_productcategories));
-    td->productcategories = (char*) (b + header->loc_productcategories + sizeof(uint32_t));
-    td->route_ids_width = *((uint32_t *) (b + header->loc_route_ids));
-    td->route_ids = (char*) (b + header->loc_route_ids + sizeof(uint32_t));
-    td->stop_ids_width = *((uint32_t *) (b + header->loc_stop_ids));
-    td->stop_ids = (char*) (b + header->loc_stop_ids + sizeof(uint32_t));
-    td->trip_ids_width = *((uint32_t *) (b + header->loc_trip_ids));
-    td->trip_ids = (char*) (b + header->loc_trip_ids + sizeof(uint32_t));
-    td->trip_active = (uint32_t*) (b + header->loc_trip_active);
-    td->route_active = (uint32_t*) (b + header->loc_route_active);
-*/
 
 #ifdef REALTIME
     td->alerts = NULL;

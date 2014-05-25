@@ -71,8 +71,8 @@ namespace BliksemWP
                 Journey shareJourney = (Journey)shareButton.DataContext;
                 ShareLinkTask shareLinkTask = new ShareLinkTask();
                 shareLinkTask.Title = "Reisadvies";
-                shareLinkTask.LinkUri = new Uri("http://1313.nl", UriKind.Absolute);
-                shareLinkTask.Message = "Dit is een reisadvies met " + shareJourney.Transfers + "overstappen";
+                shareLinkTask.LinkUri = new Uri(shareJourney.ToPlannerUrl(), UriKind.Absolute);
+                shareLinkTask.Message = "Klik op de link om je reisadvies te zien op 1313.nl";
                 shareLinkTask.Show();
             }
         }

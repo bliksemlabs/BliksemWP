@@ -16,6 +16,13 @@ namespace BliksemWP.DataObjects
         public string ProductCategory { get; set; }
         public string ProductName { get; set; }
 
+        // So far we don't need these as strings
+        public String DepartureLatitude;
+        public String DepartureLongitude;
+        public String ArrivalLatitude;
+        public String ArrivalLongitude;
+
+
         public string ProductDescription
         {
             get
